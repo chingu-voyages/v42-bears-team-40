@@ -28,6 +28,16 @@
       "name": "Regina Mc Guire", 
       "email": "reginamcguire16@gmail.com", 
       "url" : "https://github.com/rmcguire6" 
+    },
+    { 
+      "name": "Oscar Sanchez", 
+      "email": "architectsanchez13@gmail.com", 
+      "url" : "https://github.com/oscarsanchez13" 
+    },
+    { 
+      "name": "Jonah Berlyne", 
+      "email": "jonahberlyne@gmail.com", 
+      "url": "https://github.com/jonahBerlyne" 
     }
   ],
   "license": "ISC",
