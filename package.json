@@ -24,20 +24,20 @@
       "email": "lmcsay@gmail.com",
       "url": "https://github.com/ljmccode"
     },
-    { 
-      "name": "Regina Mc Guire", 
-      "email": "reginamcguire16@gmail.com", 
-      "url" : "https://github.com/rmcguire6" 
+    {
+      "name": "Regina Mc Guire",
+      "email": "reginamcguire16@gmail.com",
+      "url": "https://github.com/rmcguire6"
     },
-    { 
-      "name": "Oscar Sanchez", 
-      "email": "architectsanchez13@gmail.com", 
-      "url" : "https://github.com/oscarsanchez13" 
+    {
+      "name": "Oscar Sanchez",
+      "email": "architectsanchez13@gmail.com",
+      "url": "https://github.com/oscarsanchez13"
     },
-    { 
-      "name": "Jonah Berlyne", 
-      "email": "jonahberlyne@gmail.com", 
-      "url": "https://github.com/jonahBerlyne" 
+    {
+      "name": "Jonah Berlyne",
+      "email": "jonahberlyne@gmail.com",
+      "url": "https://github.com/jonahBerlyne"
     }
   ],
   "license": "ISC",
@@ -48,7 +48,8 @@
   "dependencies": {
     "next": "^13.1.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "zod": "^3.20.2"
   },
   "devDependencies": {
     "@types/node": "18.11.18",
