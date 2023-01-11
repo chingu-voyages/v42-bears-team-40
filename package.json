@@ -1,0 +1,58 @@
+{
+  "name": "yard-sale",
+  "version": "1.0.0",
+  "description": "Your project's `readme` is as important to success as your code. For  this reason you should put as much care into its creation and maintenance as you would any other component of the application.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chingu-voyages/v42-bears-team-40.git"
+  },
+  "contributors": [
+    {
+      "name": "Hunter Marshall",
+      "email": "beidah@gmail.com",
+      "url": "https://huntermarshall.dev"
+    },
+    {
+      "name": "Laura Callahan",
+      "email": "lmcsay@gmail.com",
+      "url": "https://github.com/ljmccode"
+    },
+    { 
+      "name": "Regina Mc Guire", 
+      "email": "reginamcguire16@gmail.com", 
+      "url" : "https://github.com/rmcguire6" 
+    },
+    { 
+      "name": "Oscar Sanchez", 
+      "email": "architectsanchez13@gmail.com", 
+      "url" : "https://github.com/oscarsanchez13" 
+    },
+    { 
+      "name": "Jonah Berlyne", 
+      "email": "jonahberlyne@gmail.com", 
+      "url": "https://github.com/jonahBerlyne" 
+    }
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chingu-voyages/v42-bears-team-40/issues"
+  },
+  "homepage": "https://github.com/chingu-voyages/v42-bears-team-40#readme",
+  "dependencies": {
+    "next": "^13.1.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.18",
+    "@types/react": "18.0.26",
+    "typescript": "4.9.4"
+  }
+}
