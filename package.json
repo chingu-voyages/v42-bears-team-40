@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Your project's `readme` is as important to success as your code. For  this reason you should put as much care into its creation and maintenance as you would any other component of the application.",
   "main": "index.js",
+  "engine": "18.13.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
