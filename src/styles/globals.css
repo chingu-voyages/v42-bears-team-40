@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  .btn {
+    @apply w-24 md:w-20 md:text-sm lg:w-24 lg:text-base py-2 text-center rounded-lg hover:transition hover:duration-300;
+  }
+
+  .btn-primary {
+    @apply bg-violet-600 text-white hover:bg-violet-500;
+  }
+
+  .btn-secondary {
+    @apply border border-violet-600 text-violet-600 hover:bg-violet-100;
+  }
+
+  .item-section {
+    @apply sm:m-8;
+  }
+
+  .item-section-center {
+    @apply max-w-5xl sm:grid sm:grid-cols-2 sm:gap-6 md:grid-cols-3;
+  }
+  /* .card-description {
+    @apply mt-2 text-slate-600 text-xs md:block md:h-24
+  } */
+}
