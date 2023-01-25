@@ -58,7 +58,7 @@ model VerificationToken {
 }
 
 model Item {
-  itemId      String     @id @default(cuid())
+  itemId      String  @id @default(cuid())
   title       String
   description String?
   picture     String?
@@ -68,12 +68,13 @@ model Item {
   user        User    @relation(fields: [userId], references: [id])
   userId      String
 }
+
 model Address {
-  addressId   String     @id @default(cuid())
-  address     String?
-  city        String?
-  state       String?
-  zipCode     Number?
-  user        User    @relation(fields: [userId], references: [id])
-  userId      String
+  addressId String  @id @default(cuid())
+  address   String?
+  city      String?
+  state     String?
+  zipCode   Int?
+  user      User    @relation(fields: [userId], references: [id])
+  userId    String
 }
