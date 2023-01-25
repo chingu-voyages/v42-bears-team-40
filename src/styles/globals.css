@@ -22,6 +22,19 @@
   .item-section-center {
     @apply max-w-5xl sm:grid sm:grid-cols-2 sm:gap-6 md:grid-cols-3;
   }
+
+  .login-background {
+    @apply fixed z-10 left-0 top-0 w-full h-screen overflow-x-auto overflow-y-hidden bg-black/50;
+  }
+
+  .login-body {
+    @apply bg-white rounded shadow-lg p-10 w-3/4 text-sm max-w-lg md:text-base md:w-2/4 mx-auto my-52 md:my-64 text-center;
+  }
+
+  .btn-Google {
+    @apply bg-blue-400 rounded py-2 pl-2 pr-4 text-white;
+  }
+
   /* .card-description {
     @apply mt-2 text-slate-600 text-xs md:block md:h-24
   } */
