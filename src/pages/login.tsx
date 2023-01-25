@@ -39,7 +39,7 @@ export default function Login({ providers }: Props) {
         {Object.values(providers).map((provider) => (
           <div className='flex justify-center' key={provider.name}>
             <button
-              className={`flex items-center btn-${provider.name}`}
+              className={`flex items-center ${provider.name}`}
               onClick={() => signIn(provider.id)}
             >
               <div className='h-10 w-10 bg-white rounded mr-2'>
