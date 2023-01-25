@@ -43,7 +43,7 @@ model User {
   email         String?   @unique
   emailVerified DateTime?
   image         String?
-  address       String?
+  address       Address[]
   accounts      Account[]
   sessions      Session[]
   item          Item[]
@@ -65,6 +65,15 @@ model Item {
   price       Float
   status      String
   category    String
+  user        User    @relation(fields: [userId], references: [id])
+  userId      String
+}
+model Address {
+  addressId   String     @id @default(cuid())
+  address     String?
+  city        String?
+  state       String?
+  zipCode     Number?
   user        User    @relation(fields: [userId], references: [id])
   userId      String
 }
