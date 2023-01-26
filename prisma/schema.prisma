@@ -63,18 +63,23 @@ model Item {
   description String?
   picture     String?
   price       Float
-  status      String
+  status      Status    @default(available)
   category    String
   user        User    @relation(fields: [userId], references: [id])
   userId      String
 }
 
 model Address {
-  addressId String  @id @default(cuid())
-  address   String?
-  city      String?
-  state     String?
-  zipCode   Int?
-  user      User    @relation(fields: [userId], references: [id])
-  userId    String
+  addressId   String     @id @default(cuid())
+  address     String?
+  city        String?
+  state       String?
+  zipCode     Int?
+  user        User    @relation(fields: [userId], references: [id])
+  userId      String
+}
+enum Status {
+  available
+  pending
+  sold
 }
