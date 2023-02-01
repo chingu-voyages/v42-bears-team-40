@@ -1,17 +1,27 @@
 import { User, Address } from '@prisma/client';
 import Layout from '../../../components/Layout';
 import SellerInfo from '../../../components/SellerInfo';
+import { ItemType } from '../../../components/Item';
+import Item from '../../../components/Item';
 import { prisma } from '../../../server/db';
 
 type YardProps = {
   user: User;
   address?: Address;
+  items: ItemType[];
 };
 
-const Yard = ({ user, address }: YardProps) => {
+const Yard = ({ user, address, items }: YardProps) => {
   return (
     <Layout>
       <SellerInfo user={user} address={address} />
+      <section className="item-section grid justify-center">
+        <div className="item-section-center">
+          {items.map((singleItem) => (
+            <Item key={singleItem.itemId} item={singleItem} />
+          ))}
+        </div>
+      </section>
     </Layout>
   );
 };
@@ -30,7 +40,12 @@ export async function getServerSideProps({ params }) {
       userId: userId,
     },
   });
+  const items = await prisma.item.findMany({
+    where: {
+      userId: userId,
+    },
+  });
   return {
-    props: { user, address },
+    props: { user, address, items },
   };
 }
