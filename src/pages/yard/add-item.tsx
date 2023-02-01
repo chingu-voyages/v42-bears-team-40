@@ -12,6 +12,7 @@ const AddItem: React.FC = () => {
     e.preventDefault();
     try {
       const body = { title, description, picture, price, category };
+      console.log("body", body);
       await fetch("/api/item", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -24,20 +25,22 @@ const AddItem: React.FC = () => {
   };
   return (
     <Layout>
-      <div className="flex  flex-auto flex-col bg-blue-300 items-center">
+      <div className="flex  flex-auto flex-col items-center">
         <h2 className="text-2l font-bold">Add An Item</h2>
-        <form className="flex flex-col items-center justify-center">
-          <div className="flex-row">
+        <form className="p-4 border border-violet-600 rounded-lg flex flex-col items-center justify-center">
+          <div className=" flex-row ">
             <label>Item Name</label>
             <input
+              className="form-item"
               onChange={(e) => setTitle(e.target.value)}
               type="text"
               value={title}
             />
           </div>
-          <div className="flex-row">
+          <div className="flex-row ">
             <label>Description</label>
             <input
+              className="form-item"
               onChange={(e) => setDescription(e.target.value)}
               type="text"
               placeholder="Can be left empty"
@@ -47,6 +50,7 @@ const AddItem: React.FC = () => {
           <div className="flex-row">
             <label>Image</label>
             <input
+              className="form-item"
               onChange={(e) => setPicture(e.target.value)}
               type="text"
               placeholder="Can be left empty"
@@ -56,6 +60,7 @@ const AddItem: React.FC = () => {
           <div className="flex-row">
             <label>Price</label>
             <input
+              className="form-item"
               onChange={(e) => setPrice(e.target.value)}
               type="string"
               value={price}
@@ -64,13 +69,14 @@ const AddItem: React.FC = () => {
           <div className="flex-row">
             <label>Category</label>
             <input
+              className="form-item"
               onChange={(e) => setCategory(e.target.value)}
               type="text"
               value={category}
             />
           </div>
           <button
-            className="btn bg-blue-400"
+            className="btn btn-primary m-2"
             type="submit"
             onClick={(e) => submitData(e)}
           >
