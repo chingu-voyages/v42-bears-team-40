@@ -1,6 +1,7 @@
 import { User, Address } from '@prisma/client';
 import Layout from '../../../components/Layout';
 import SellerInfo from '../../../components/SellerInfo';
+import { prisma } from '../../../server/db';
 
 type YardProps = {
   user: User;
@@ -8,8 +9,6 @@ type YardProps = {
 };
 
 const Yard = ({ user, address }: YardProps) => {
-  console.log({ user, address });
-
   return (
     <Layout>
       <SellerInfo user={user} address={address} />
