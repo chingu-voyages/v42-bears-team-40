@@ -4,7 +4,7 @@
 
 @layer base {
   .btn {
-    @apply w-24 md:w-20 md:text-sm lg:w-24 lg:text-base py-2 text-center rounded-lg hover:transition hover:duration-300;
+    @apply w-28 p-2 text-center tracking-wide rounded-lg hover:transition hover:duration-300;
   }
 
   .btn-primary {
@@ -41,7 +41,8 @@
     @apply pl-2 rounded w-fit bg-slate-100 text-slate-700 border ml-1 flex-grow md:flex-grow-0
   }
 
-  /* .card-description {
-    @apply mt-2 text-slate-600 text-xs md:block md:h-24
-  } */
+  .item-card:hover {
+    background: linear-gradient(to right,
+    rgba(126, 213, 111, 0.85), hsla(160, 64%, 43%, 0.85));
+  }
 }
