@@ -3,6 +3,7 @@ import { User, Address } from '@prisma/client';
 import SellerImg from './SellerImg';
 import Button from './Button';
 import SellerDetails from './SellerDetails';
+import { useState } from 'react';
 
 type SellerProps = {
   user: User;
@@ -10,17 +11,20 @@ type SellerProps = {
 };
 
 const SellerInfo = ({ user, address }: SellerProps) => {
+  const [isUpdating, setIsUpdating] = useState(false);
   const { data: session } = useSession();
   const { name, image } = user;
 
   return (
-    <div className="seller-container h-48 flex items-center bg-blue-200">
-      <div className="seller-content px-6 flex items-center">
-        <SellerImg image={image} />
-        <div className="seller-info tracking-wide">
+    <div className="seller-container h-72 md:h-48 flex items-center bg-blue-200">
+      <div className="seller-content w-full px-6 flex flex-shrink-0 items-center">
+        <SellerImg image={image} hidden={isUpdating ? true : false} />
+        <div className="seller-info flex-grow tracking-wide">
           {!session && (
             <>
-              <p className="font-bold text-xl text-slate-800 mb-2">{name}</p>
+              <p className="font-bold text-lg md:text-xl text-slate-800 mb-2">
+                {name}
+              </p>
               <div className="mt-3">
                 <Button style="btn btn-primary px-4" link="/contact">
                   Contact
@@ -28,7 +32,14 @@ const SellerInfo = ({ user, address }: SellerProps) => {
               </div>
             </>
           )}
-          {session && <SellerDetails user={user} address={address} />}
+          {session && (
+            <SellerDetails
+              handleUpdating={setIsUpdating}
+              isUpdating={isUpdating}
+              user={user}
+              address={address}
+            />
+          )}
         </div>
       </div>
     </div>
