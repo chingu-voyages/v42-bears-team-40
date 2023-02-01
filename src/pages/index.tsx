@@ -1,4 +1,5 @@
 import { GetStaticProps } from "next";
+import { prisma } from "../server/db";
 import Layout from "../components/Layout";
 import Item from "../components/Item";
 import { ItemType } from "../components/Item";
