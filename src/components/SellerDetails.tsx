@@ -1,14 +1,16 @@
-import { useState, useEffect, Dispatch, SetStateAction, useRef } from 'react';
+import { useState, Dispatch, SetStateAction, useRef } from 'react';
 import { User, Address } from '@prisma/client';
 import addressIcon from '../styles/images/address.png';
 import mailIcon from '../styles/images/mail.png';
 import checkAddressAdded from '../utils/checkAddress';
 import getSeller from '../utils/getSeller';
+import { handleUpdatePhoto } from '../utils/updatePhoto';
 
 type Props = {
   user: User;
   address?: Address;
   handleUpdating: Dispatch<SetStateAction<boolean>>;
+  handleSetImage: Dispatch<SetStateAction<string>>;
   isUpdating: boolean;
 };
 
@@ -17,8 +19,10 @@ const SellerDetails = ({
   address,
   handleUpdating,
   isUpdating,
+  handleSetImage,
 }: Props) => {
   const { name, email, id } = user;
+  const imageRef = useRef(null);
 
   const initialUser = {
     name,
@@ -31,19 +35,14 @@ const SellerDetails = ({
 
   const [userForm, setUserForm] = useState(initialUser);
   const [userInfo, setUserInfo] = useState(initialUser);
-  const [hasAddress, setHasAddress] = useState(false);
+  const [hasAddress, setHasAddress] = useState(address ? true : false);
   const [updatePhoto, setUpdatePhoto] = useState(false);
 
-  // Fetch seller info from database
   const getSellerInfo = async () => {
     const { seller, address } = await getSeller(id);
     setUserInfo(seller);
     if (address) setHasAddress(true);
   };
-
-  useEffect(() => {
-    getSellerInfo();
-  }, []);
 
   const handleOnChange = (e) => {
     setUserForm({
@@ -64,8 +63,8 @@ const SellerDetails = ({
       const user = response.json();
       const { address, city, state, zipCode } = userForm;
       const updatedAddress = checkAddressAdded(address, city, state, zipCode);
-      // If new address and no address yet, create an address
       let sellerAddress;
+      // If new address and no address yet, create an address
       if (!hasAddress && updatedAddress) {
         const response = await fetch(`/api/seller-address`, {
           method: 'POST',
@@ -102,11 +101,6 @@ const SellerDetails = ({
     } catch (error) {
       console.log(error);
     }
-  };
-
-  const handleUpdatePhoto = async () => {
-    // TODO: Upload photo to photo storage website
-    console.log('handling photo update');
   };
 
   return isUpdating ? (
@@ -226,7 +220,7 @@ const SellerDetails = ({
           Update Profile
         </button>
         <button
-          className="text-blue-700 hover:underline text-sm mt-2 ml-3"
+          className="text-green-800 hover:underline text-sm mt-2 ml-3"
           onClick={() => setUpdatePhoto(true)}
         >
           Update Photo
@@ -235,10 +229,21 @@ const SellerDetails = ({
     </>
   ) : (
     <div>
-      <div>
-        <input type="file" name="image" accept=".jpeg, .jpeg, .png" />
+      <div className="max-w-50">
+        <input
+          ref={imageRef}
+          type="file"
+          name="image"
+          accept=".jpeg, .jpeg, .png"
+          className="w-50 overflow-hidden text-xs md:text-base"
+        />
       </div>
-      <button className="btn btn-primary w-20 mt-4" onClick={handleUpdatePhoto}>
+      <button
+        className="btn btn-primary w-40 mt-4"
+        onClick={() =>
+          handleUpdatePhoto(imageRef, id, handleSetImage, setUpdatePhoto)
+        }
+      >
         Update
       </button>
     </div>
