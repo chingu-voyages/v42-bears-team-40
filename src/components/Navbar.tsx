@@ -21,7 +21,9 @@ const Navbar = () => {
               {!isAdding && (
                 <Link href={`/yard/${id}/item/add-item`}>Add Item</Link>
               )}
-              <button onClick={() => signOut()}>Log out</button>
+              <button onClick={() => signOut({ callbackUrl: '/' })}>
+                Log out
+              </button>
             </>
           ) : (
             <Link href="/login">Sign In</Link>
