@@ -17,7 +17,6 @@ const AddItem: React.FC = () => {
     e.preventDefault();
     try {
       const body = { title, description, picture, price, category };
-      console.log('body', body);
       await fetch('/api/item', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

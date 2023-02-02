@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { Dispatch, SetStateAction } from 'react';
+import { useState, useEffect, Dispatch, SetStateAction, useRef } from 'react';
 import { User, Address } from '@prisma/client';
 import addressIcon from '../styles/images/address.png';
 import mailIcon from '../styles/images/mail.png';
@@ -33,6 +32,7 @@ const SellerDetails = ({
   const [userForm, setUserForm] = useState(initialUser);
   const [userInfo, setUserInfo] = useState(initialUser);
   const [hasAddress, setHasAddress] = useState(false);
+  const [updatePhoto, setUpdatePhoto] = useState(false);
 
   // Fetch seller info from database
   const getSellerInfo = async () => {
@@ -102,6 +102,11 @@ const SellerDetails = ({
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleUpdatePhoto = async () => {
+    // TODO: Upload photo to photo storage website
+    console.log('handling photo update');
   };
 
   return isUpdating ? (
@@ -189,7 +194,7 @@ const SellerDetails = ({
         </button>
       </div>
     </form>
-  ) : (
+  ) : !updatePhoto ? (
     <>
       <p className="font-bold text-lg md:text-xl text-slate-800 mb-2">
         {userInfo.name}
@@ -215,13 +220,28 @@ const SellerDetails = ({
           )}
         </div>
         <button
-          className="text-violet-600 hover:underline text-base mt-2"
+          className="text-violet-600 hover:underline text-sm mt-2"
           onClick={() => handleUpdating(true)}
         >
           Update Profile
         </button>
+        <button
+          className="text-blue-700 hover:underline text-sm mt-2 ml-3"
+          onClick={() => setUpdatePhoto(true)}
+        >
+          Update Photo
+        </button>
       </div>
     </>
+  ) : (
+    <div>
+      <div>
+        <input type="file" name="image" accept=".jpeg, .jpeg, .png" />
+      </div>
+      <button className="btn btn-primary w-20 mt-4" onClick={handleUpdatePhoto}>
+        Update
+      </button>
+    </div>
   );
 };
 
