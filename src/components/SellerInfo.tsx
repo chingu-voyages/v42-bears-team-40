@@ -12,7 +12,7 @@ type SellerProps = {
 
 const SellerInfo = ({ user, address }: SellerProps) => {
   const { data: session } = useSession();
-  const { name, image } = user;
+  const { name = '', image = '' } = user;
   const [sellerImage, setSellerImage] = useState(image);
   const [isUpdating, setIsUpdating] = useState(false);
 
