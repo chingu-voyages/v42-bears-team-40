@@ -1,24 +1,28 @@
-import React, { useState } from "react";
-import Router from "next/router";
-import Layout from "../../components/Layout";
+import React, { useState } from 'react';
+import Router from 'next/router';
+import Layout from '../../../../components/Layout';
+import { useSession } from 'next-auth/react';
 
 const AddItem: React.FC = () => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [picture, setPicture] = useState("");
-  const [price, setPrice] = useState("");
-  const [category, setCategory] = useState("");
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [picture, setPicture] = useState('');
+  const [price, setPrice] = useState('');
+  const [category, setCategory] = useState('');
+  const { data: session } = useSession();
+
+  const id = session?.user?.id;
+
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     try {
       const body = { title, description, picture, price, category };
-      console.log("body", body);
-      await fetch("/api/item", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+      await fetch('/api/item', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
-      await Router.push("/");
+      await Router.push(`/yard/${id}`);
     } catch (error) {
       console.log(error);
     }

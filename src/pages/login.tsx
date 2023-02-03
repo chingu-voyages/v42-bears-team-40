@@ -26,24 +26,24 @@ export default function Login({ providers }: Props) {
   const { data: session } = useSession();
 
   {
-    session && router.push('/');
+    session && router.push(`yard/${session.user.id}`);
   }
 
   return (
-    <div className='login-background'>
-      <div className='login-body'>
+    <div className="login-background">
+      <div className="login-body">
         {/* Loop through the different providers and make a login button for each */}
-        <h1 className='pb-10 font-semibold font-mono text-xl'>
+        <h1 className="pb-10 font-semibold font-mono text-xl">
           Login to Your Account
         </h1>
         {Object.values(providers).map((provider) => (
-          <div className='flex justify-center' key={provider.name}>
+          <div className="flex justify-center" key={provider.name}>
             <button
               className={`flex items-center ${provider.name}`}
               onClick={() => signIn(provider.id)}
             >
-              <div className='h-10 w-10 bg-white rounded mr-2'>
-                <img className='h-full' src={providerIcons[provider.name]} />
+              <div className="h-10 w-10 bg-white rounded mr-2">
+                <img className="h-full" src={providerIcons[provider.name]} />
               </div>
               Sign in with {provider.name}
             </button>

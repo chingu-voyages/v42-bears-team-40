@@ -25,7 +25,7 @@
 
   .login-background {
     @apply fixed z-10 left-0 top-0 w-full h-screen overflow-x-auto overflow-y-hidden bg-cover bg-no-repeat;
-    background-image: url("./image/cool-background.png");
+    background-image: url('./images/cool-background.png');
   }
 
   .login-body {
@@ -34,6 +34,10 @@
 
   .Google {
     @apply bg-blue-400 rounded py-2 pl-2 pr-4 text-white;
+  }
+
+  .seller-input {
+    @apply pl-2 rounded w-fit bg-slate-100 text-slate-700 border ml-1 flex-grow md:flex-grow-0
   }
 
   .item-card:hover {
