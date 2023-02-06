@@ -62,7 +62,7 @@ model Item {
   title       String
   description String?
   picture     String?
-  price       String
+  price       Float
   status      Status    @default(available)
   category    String
   user        User    @relation(fields: [userId], references: [id])
