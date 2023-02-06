@@ -35,7 +35,7 @@ const Item = ({ item }: ItemProps) => {
           {session ? (
             <Link
               className="btn btn-primary block mx-auto"
-              href={`yard/${userId}/item/${itemId}`}
+              href={`/yard/${userId}/item/${itemId}`}
             >
               Edit Item
             </Link>
