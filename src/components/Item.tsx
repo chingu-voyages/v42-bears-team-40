@@ -73,12 +73,14 @@ const Item = ({ item }: ItemProps) => {
               </div>
             </div>
             <div className='flex-col'>
-              <div className='font-bold text-slate-800'>${price}</div>
+              <div className='font-bold text-slate-800 px-2 text-end'>
+                ${price}
+              </div>
               {status === 'pending' && (
-                <div className={`status-btn pending-btn`}>{status}</div>
+                <div className='status-btn pending-btn'>{status}</div>
               )}
               {status === 'sold' && userId === id && (
-                <div className={`status-btn sold-btn`}>{status}</div>
+                <div className='status-btn sold-btn'>{status}</div>
               )}
             </div>
           </div>
