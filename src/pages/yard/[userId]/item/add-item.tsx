@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import Layout from '../../../../components/Layout';
 import { useSession } from 'next-auth/react';
 
@@ -10,8 +10,12 @@ const AddItem: React.FC = () => {
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
   const { data: session } = useSession();
-
   const id = session?.user?.id;
+  const router = useRouter();
+  const { userId } = router.query;
+  if (userId !== id) {
+    router.push('/');
+  }
 
   const submitData = async (e: React.SyntheticEvent) => {
     let priceNumber = Number(price);
