@@ -8,7 +8,7 @@ const Layout = ({ children }: LayoutProps) => {
   return (
     <>
       <Navbar />
-      <div>{children}</div>
+      <div className="bg-light-green min-height">{children}</div>
       <Footer />
     </>
   );

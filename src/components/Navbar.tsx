@@ -10,23 +10,33 @@ const Navbar = () => {
   const home = session ? `/yard/${id}` : '/';
 
   return (
-    <nav className="h-16">
-      <div className="nav-center flex justify-between h-full items-center mx-10">
-        <div className="logo">
+    <nav className="h-16 bg-dark-green text-gray-50 tracking-wide md:text-lg">
+      <div className="nav-center flex justify-between h-full items-center mx-6 md:mx-10">
+        <div className="logo hover:text-custom-yellow">
           <a href={home}>Yard Sale</a>
         </div>
-        <div className="nav-links flex justify-between space-x-8">
+        <div className="nav-links flex justify-between space-x-4 md:space-x-8">
           {session ? (
             <>
               {!isAdding && (
-                <Link href={`/yard/${id}/item/add-item`}>Add Item</Link>
+                <Link
+                  className="hover:text-custom-yellow"
+                  href={`/yard/${id}/item/add-item`}
+                >
+                  Add Item
+                </Link>
               )}
-              <button onClick={() => signOut({ callbackUrl: '/' })}>
+              <button
+                className="hover:text-custom-yellow"
+                onClick={() => signOut({ callbackUrl: '/' })}
+              >
                 Log out
               </button>
             </>
           ) : (
-            <Link href="/login">Sign In</Link>
+            <Link className="hover:text-custom-yellow" href="/login">
+              Sign In
+            </Link>
           )}
         </div>
       </div>

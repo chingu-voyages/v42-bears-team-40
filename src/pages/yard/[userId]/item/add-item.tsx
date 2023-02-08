@@ -29,7 +29,7 @@ const AddItem: React.FC = () => {
   };
   return (
     <Layout>
-      <div className="flex  flex-auto flex-col items-center">
+      <div className="flex flex-auto flex-col items-center">
         <h2 className="text-2l font-bold">Add An Item</h2>
         <form className="p-4 border border-violet-600 rounded-lg flex flex-col items-center justify-center">
           <div className=" flex-row ">
