@@ -32,7 +32,7 @@ const Item = ({ item }: ItemProps) => {
           <div className='card-description'>
             <p className='mb-4 font-medium'>{description}</p>
           </div>
-          {session ? (
+          {session && userId === session.user.id ? (
             <Link
               className='btn btn-primary block mx-auto'
               href={`/yard/${userId}/item/${itemId}`}
