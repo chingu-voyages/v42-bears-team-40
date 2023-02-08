@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
 export type ItemType = {
   itemId: string;
@@ -19,6 +20,8 @@ type ItemProps = {
 const Item = ({ item }: ItemProps) => {
   const { itemId, title, picture, description, price, category, userId } = item;
   const { data: session } = useSession();
+  const router = useRouter();
+  console.log(router.pathname);
 
   return (
     <div className='item-card w-72 border shadow-lg rounded-lg sm:m-0 overflow-hidden group'>
@@ -39,14 +42,14 @@ const Item = ({ item }: ItemProps) => {
             >
               Edit Item
             </Link>
-          ) : (
+          ) : router.pathname === '/' ? (
             <Link
               className='btn btn-primary block mx-auto'
               href={`/yard/${userId}`}
             >
               View Yard
             </Link>
-          )}
+          ) : null}
         </div>
       </div>
       <div className='item-info bg-gray-100'>
