@@ -7,16 +7,17 @@ const AddItem: React.FC = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [picture, setPicture] = useState('');
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
   const { data: session } = useSession();
 
   const id = session?.user?.id;
 
   const submitData = async (e: React.SyntheticEvent) => {
+    let priceNumber = Number(price);
     e.preventDefault();
     try {
-      const body = { title, description, picture, price, category };
+      const body = { title, description, picture, priceNumber, category };
       await fetch('/api/item', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -65,8 +66,8 @@ const AddItem: React.FC = () => {
             <label>Price</label>
             <input
               className='form-item'
-              onChange={(e) => setPrice(Number(e.target.value))}
-              type='string'
+              onChange={(e) => setPrice(e.target.value)}
+              type='text'
               value={price}
             />
           </div>
