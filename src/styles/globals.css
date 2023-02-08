@@ -24,7 +24,7 @@
   }
 
   .item-section-center {
-    @apply max-w-5xl grid gap-8;
+    @apply max-w-5xl grid gap-6;
     grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
     width: 80vw;
   }
