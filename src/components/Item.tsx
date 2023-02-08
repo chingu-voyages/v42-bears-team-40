@@ -21,7 +21,7 @@ const Item = ({ item }: ItemProps) => {
   const { data: session } = useSession();
 
   return (
-    <div className='item-card border shadow-lg rounded-lg m-6 sm:m-0 overflow-hidden group'>
+    <div className='item-card w-72 border shadow-lg rounded-lg sm:m-0 overflow-hidden group'>
       <div className='w-full drop-shadow-sm flex items-center justify-center h-80 relative group'>
         <img
           className='absolute object-cover h-full w-full group-hover:opacity-20'
@@ -49,7 +49,7 @@ const Item = ({ item }: ItemProps) => {
           )}
         </div>
       </div>
-      <div className='item-info'>
+      <div className='item-info bg-gray-100'>
         <div className='item-header p-4'>
           <div className='flex justify-between'>
             <div>

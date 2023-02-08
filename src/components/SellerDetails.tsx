@@ -213,18 +213,20 @@ const SellerDetails = ({
             <p className="text-slate-700">No address listed</p>
           )}
         </div>
-        <button
-          className="text-violet-600 hover:underline text-sm mt-2"
-          onClick={() => handleUpdating(true)}
-        >
-          Update Profile
-        </button>
-        <button
-          className="text-green-800 hover:underline text-sm mt-2 ml-3"
-          onClick={() => setUpdatePhoto(true)}
-        >
-          Update Photo
-        </button>
+        <div className="">
+          <button
+            className="profile-button mr-2"
+            onClick={() => handleUpdating(true)}
+          >
+            Update Profile
+          </button>
+          <button
+            className="profile-button"
+            onClick={() => setUpdatePhoto(true)}
+          >
+            Update Photo
+          </button>
+        </div>
       </div>
     </>
   ) : (

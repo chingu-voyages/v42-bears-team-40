@@ -16,11 +16,19 @@
   }
 
   .item-section {
-    @apply sm:m-8;
+    @apply p-8 mx-auto;
+  }
+
+  .min-height {
+    min-height: calc(100vh - 64px);
+  }
+
+  .item-section {
+    @apply grid;
   }
 
   .item-section-center {
-    @apply max-w-5xl sm:grid sm:grid-cols-2 sm:gap-6 md:grid-cols-3;
+    @apply max-w-5xl grid w-72 gap-8 sm:grid-cols-2 sm:w-[608px] lg:grid-cols-3 lg:w-[928px]  mx-auto;
   }
 
   .login-background {
@@ -41,12 +49,13 @@
   }
 
   .item-card:hover {
-    background: linear-gradient(
-      to right,
-      rgba(126, 213, 111, 0.85),
-      hsla(160, 64%, 43%, 0.85)
-    );
+    background: linear-gradient(125deg, rgba(249,188,96,0.7553396358543417) 43%, rgba(249,188,96,0.727328431372549) 66%);
   }
+
+  .profile-button {
+    @apply text-dark-green tracking-wide border-2 rounded w-32 px-2 py-1 border-dark-green hover:bg-custom-yellow text-sm mt-2
+  }
+
   .form-item {
     @apply m-1 border border-violet-600 rounded-sm;
   }
