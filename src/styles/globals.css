@@ -16,17 +16,19 @@
   }
 
   .item-section {
-    @apply p-8;
+    @apply p-8 mx-auto;
   }
 
   .min-height {
     min-height: calc(100vh - 64px);
   }
 
+  .item-section {
+    @apply grid;
+  }
+
   .item-section-center {
-    @apply max-w-5xl grid gap-6;
-    grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
-    width: 80vw;
+    @apply max-w-5xl grid w-72 gap-8 sm:grid-cols-2 sm:w-[608px] lg:grid-cols-3 lg:w-[928px]  mx-auto;
   }
 
   .login-background {

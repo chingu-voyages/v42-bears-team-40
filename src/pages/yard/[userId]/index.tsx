@@ -15,10 +15,10 @@ const Yard = ({ user, address, items }: YardProps) => {
   return (
     <Layout>
       <SellerInfo user={user} address={address} />
-      <section className="item-section grid justify-center ">
-        <div className="item-section-center">
+      <section className='item-section'>
+        <div className='item-section-center'>
           {items.map((singleItem) => (
-            <div key={singleItem.itemId} className="flex justify-center">
+            <div key={singleItem.itemId} className='flex justify-center'>
               <Item item={singleItem} />
             </div>
           ))}
