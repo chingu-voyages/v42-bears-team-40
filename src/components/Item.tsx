@@ -21,7 +21,6 @@ const Item = ({ item }: ItemProps) => {
   const { itemId, title, picture, description, price, category, userId } = item;
   const { data: session } = useSession();
   const router = useRouter();
-  console.log(router.pathname);
 
   return (
     <div className='item-card w-72 border shadow-lg rounded-lg sm:m-0 overflow-hidden group'>
