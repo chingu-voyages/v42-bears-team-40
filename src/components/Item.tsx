@@ -18,9 +18,19 @@ type ItemProps = {
 };
 
 const Item = ({ item }: ItemProps) => {
-  const { itemId, title, picture, description, price, category, userId } = item;
+  const {
+    itemId,
+    title,
+    picture,
+    description,
+    price,
+    category,
+    status,
+    userId,
+  } = item;
   const { data: session } = useSession();
   const router = useRouter();
+  const id = session?.user.id;
 
   return (
     <div className='item-card w-72 border shadow-lg rounded-lg sm:m-0 overflow-hidden group'>
@@ -34,7 +44,7 @@ const Item = ({ item }: ItemProps) => {
           <div className='card-description'>
             <p className='mb-4 font-medium'>{description}</p>
           </div>
-          {session && userId === session.user.id ? (
+          {session && userId === id ? (
             <Link
               className='btn btn-primary block mx-auto'
               href={`/yard/${userId}/item/${itemId}`}
@@ -62,7 +72,15 @@ const Item = ({ item }: ItemProps) => {
                 {category}
               </div>
             </div>
-            <div className='font-bold text-slate-800'>${price}</div>
+            <div className='flex-col'>
+              <div className='font-bold text-slate-800'>${price}</div>
+              {status === 'pending' && (
+                <div className={`status-btn pending-btn`}>{status}</div>
+              )}
+              {status === 'sold' && userId === id && (
+                <div className={`status-btn sold-btn`}>{status}</div>
+              )}
+            </div>
           </div>
         </div>
       </div>
