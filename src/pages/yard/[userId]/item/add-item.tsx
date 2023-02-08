@@ -7,7 +7,7 @@ const AddItem: React.FC = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [picture, setPicture] = useState('');
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState(0);
   const [category, setCategory] = useState('');
   const { data: session } = useSession();
 
@@ -29,59 +29,59 @@ const AddItem: React.FC = () => {
   };
   return (
     <Layout>
-      <div className="flex  flex-auto flex-col items-center">
-        <h2 className="text-2l font-bold">Add An Item</h2>
-        <form className="p-4 border border-violet-600 rounded-lg flex flex-col items-center justify-center">
-          <div className=" flex-row ">
+      <div className='flex  flex-auto flex-col items-center'>
+        <h2 className='text-2l font-bold'>Add An Item</h2>
+        <form className='p-4 border border-violet-600 rounded-lg flex flex-col items-center justify-center'>
+          <div className=' flex-row '>
             <label>Item Name</label>
             <input
-              className="form-item"
+              className='form-item'
               onChange={(e) => setTitle(e.target.value)}
-              type="text"
+              type='text'
               value={title}
             />
           </div>
-          <div className="flex-row ">
+          <div className='flex-row '>
             <label>Description</label>
             <input
-              className="form-item"
+              className='form-item'
               onChange={(e) => setDescription(e.target.value)}
-              type="text"
-              placeholder="Can be left empty"
+              type='text'
+              placeholder='Can be left empty'
               value={description}
             />
           </div>
-          <div className="flex-row">
+          <div className='flex-row'>
             <label>Image</label>
             <input
-              className="form-item"
+              className='form-item'
               onChange={(e) => setPicture(e.target.value)}
-              type="text"
-              placeholder="Can be left empty"
+              type='text'
+              placeholder='Can be left empty'
               value={picture}
             />
           </div>
-          <div className="flex-row">
+          <div className='flex-row'>
             <label>Price</label>
             <input
-              className="form-item"
-              onChange={(e) => setPrice(e.target.value)}
-              type="string"
+              className='form-item'
+              onChange={(e) => setPrice(Number(e.target.value))}
+              type='string'
               value={price}
             />
           </div>
-          <div className="flex-row">
+          <div className='flex-row'>
             <label>Category</label>
             <input
-              className="form-item"
+              className='form-item'
               onChange={(e) => setCategory(e.target.value)}
-              type="text"
+              type='text'
               value={category}
             />
           </div>
           <button
-            className="btn btn-primary m-2"
-            type="submit"
+            className='btn btn-primary m-2'
+            type='submit'
             onClick={(e) => submitData(e)}
           >
             Add Item
