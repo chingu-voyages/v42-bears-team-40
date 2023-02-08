@@ -15,6 +15,19 @@
     @apply border border-violet-600 text-violet-600 hover:bg-violet-100;
   }
 
+  .status-btn {
+    @apply py-0.5 px-2 text-slate-700 rounded-lg text-sm capitalize text-center
+  }
+
+  .pending-btn {
+    background: #f0db9e;
+   
+  }
+
+  .sold-btn {
+    background: #f6c3c3;
+  }
+
   .item-section {
     @apply p-8 mx-auto;
   }

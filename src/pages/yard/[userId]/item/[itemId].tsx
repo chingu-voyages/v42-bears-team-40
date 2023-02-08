@@ -46,8 +46,8 @@ const EditItem: React.FC = ({ item }: ItemProps) => {
     description: description || '',
     price: price || 0,
     picture: picture || '',
-    status: status,
-    category: category,
+    status,
+    category,
   };
 
   const [itemForm, setItemForm] = useState(initialItem);
@@ -69,8 +69,8 @@ const EditItem: React.FC = ({ item }: ItemProps) => {
     });
   };
   const handleStatus = (e) => {
-    e.preventDefault();
     let status = e.target.value;
+    console.log('e.target.value', status);
     setItemForm({
       ...itemForm,
       status: status,
@@ -78,8 +78,6 @@ const EditItem: React.FC = ({ item }: ItemProps) => {
   };
   const submitItem = (e) => {
     e.preventDefault();
-    console.log('itemForm', itemForm);
-
     saveEditedItem(itemForm);
   };
   async function saveEditedItem(itemForm): Promise<void> {
@@ -161,6 +159,7 @@ const EditItem: React.FC = ({ item }: ItemProps) => {
               type='radio'
               name='status'
               value='available'
+              checked={itemForm.status === 'available'}
             />
             <label>Available</label>
             <input
@@ -169,7 +168,7 @@ const EditItem: React.FC = ({ item }: ItemProps) => {
               type='radio'
               value='pending'
               name='status'
-              checked
+              checked={itemForm.status === 'pending'}
             />
             <label>Pending</label>
             <input
@@ -178,6 +177,7 @@ const EditItem: React.FC = ({ item }: ItemProps) => {
               type='radio'
               value='sold'
               name='status'
+              checked={itemForm.status === 'sold'}
             />
             <label>Sold</label>
           </div>
