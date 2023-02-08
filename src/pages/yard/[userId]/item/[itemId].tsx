@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Router from 'next/router';
 import Layout from '../../../../components/Layout';
 import { ItemType } from '../../../../components/Item';
 import { prisma } from '../../../../server/db';
@@ -18,7 +19,16 @@ export async function getServerSideProps({ params }) {
   };
 }
 const EditItem: React.FC = ({ item }: ItemProps) => {
-  const { title, description, price, picture, status, category, itemId } = item;
+  const {
+    title,
+    description,
+    price,
+    picture,
+    status,
+    category,
+    itemId,
+    userId,
+  } = item;
 
   const initialItem = {
     itemId,
@@ -42,6 +52,7 @@ const EditItem: React.FC = ({ item }: ItemProps) => {
   const handlePrice = (e) => {
     e.preventDefault();
     let price = Number(e.target.value);
+    console.log(price);
     setItemForm({
       ...itemForm,
       price: price,
@@ -65,12 +76,12 @@ const EditItem: React.FC = ({ item }: ItemProps) => {
     const body = {
       ...itemForm,
     };
-    console.log('body from saveEdited', body);
     try {
       await fetch(`/api/item/${itemId}`, {
         method: 'PUT',
         body: JSON.stringify(body),
       });
+      Router.push(`/yard/${userId}`);
     } catch (error) {
       console.log(error);
     }
@@ -118,7 +129,7 @@ const EditItem: React.FC = ({ item }: ItemProps) => {
               className='form-item'
               onChange={(e) => handlePrice(e)}
               type='text'
-              value={price}
+              value={itemForm.price}
               name='price'
             />
           </div>

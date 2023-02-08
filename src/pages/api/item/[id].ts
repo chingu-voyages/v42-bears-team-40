@@ -4,8 +4,9 @@
 // Update Item
 export default async function editItem(req, res) {
   const itemId = req.query.id;
-  const { title, description, picture, price, category, status } = req.body;
-  console.log('from backend itemId', itemId);
+  const { title, description, picture, price, category, status } = JSON.parse(
+    req.body
+  );
 
   const item = await prisma.item.update({
     where: { itemId: itemId },
