@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Router from 'next/router';
 import Layout from '../../../../components/Layout';
 import { ItemType } from '../../../../components/Item';
 import { prisma } from '../../../../server/db';
+import { useSession } from 'next-auth/react';
 
 type ItemProps = {
   item: ItemType;
@@ -29,6 +30,15 @@ const EditItem: React.FC = ({ item }: ItemProps) => {
     itemId,
     userId,
   } = item;
+
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    const id = session?.user?.id;
+    if (userId !== id) {
+      Router.push('/');
+    }
+  }, []);
 
   const initialItem = {
     itemId,
