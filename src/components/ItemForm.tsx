@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router';
+import { useRef } from 'react';
 
 type Props = {
   formChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmitForm: (e: React.SyntheticEvent) => Promise<void>;
+  handleSubmitForm: (e: React.SyntheticEvent, imageRef) => Promise<void>;
   formData: {
     itemId?: string;
     title: string;
     description: string;
     price: string | number;
-    picture: string;
     status?: 'available' | 'pending' | 'sold';
     category: string;
   };
@@ -19,6 +19,7 @@ const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
   const isEditing = !router.pathname.includes('add-item');
   const notComplete =
     formData.title === '' || formData.price === '' || formData.category === '';
+  const imageRef = useRef(null);
 
   return (
     <div className='form-center'>
@@ -73,14 +74,14 @@ const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
               value={formData.description}
             />
           </div>
-          <div className='text-left'>
-            <label className='font-semibold text-lg'>Image</label>
+          <div className='text-left mt-6'>
+            <label className='font-semibold text-lg mr-5'>Image</label>
             <input
-              className='form-input w-full text-slate-800'
-              onChange={formChange}
-              type='text'
-              name='picture'
-              value={formData.picture}
+              ref={imageRef}
+              type='file'
+              name='image'
+              accept='.jpeg, .jpeg, .png'
+              className='w-50 overflow-hidden text-xs md:text-base'
             />
           </div>
           {isEditing && (
@@ -122,7 +123,7 @@ const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
                 : 'btn btn-primary m-2'
             }
             type='submit'
-            onClick={handleSubmitForm}
+            onClick={(e) => handleSubmitForm(e, imageRef)}
             disabled={notComplete}
           >
             {isEditing ? 'Edit Item' : 'Add Item'}
