@@ -3,6 +3,7 @@ import { GetStaticProps } from 'next';
 import { prisma } from '../server/db';
 import Layout from '../components/Layout';
 import SearchBar from '../components/SearchBar';
+import Category from '../components/Category';
 import Item from '../components/Item';
 import { ItemType } from '../components/Item';
 
@@ -29,7 +30,10 @@ const Search: React.FC<Props> = (props) => {
   return (
     <Layout>
       <section className='item-section grid justify-center'>
-        <SearchBar handleSearch={handleSearch} />
+        <div className='row-auto'>
+          <SearchBar handleSearch={handleSearch} />
+          <Category />
+        </div>
         <div className='item-section-center'>
           {filteredItems.length > 0 &&
             filteredItems.map((singleItem) => (
