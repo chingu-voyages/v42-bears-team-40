@@ -54,10 +54,10 @@ export const handleImagePhoto = async (imageRef, itemId) => {
   if (!newImage) return;
   const updateItemImage = async () => {
     try {
-      await fetch(`/api/item-image/${itemId}`, {
+      await fetch(`/api/item/${itemId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newImage),
+        body: JSON.stringify({ picture: newImage, type: 'update-item-image' }),
       });
     } catch (error) {
       console.error(error);
