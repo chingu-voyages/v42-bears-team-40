@@ -39,4 +39,17 @@ export default async function handleItem(req, res) {
       }
     }
   }
+
+  if (req.method === 'DELETE') {
+    try {
+      const deletedItem = await prisma.item.delete({
+        where: {
+          itemId,
+        },
+      });
+      res.json(deletedItem);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }

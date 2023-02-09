@@ -15,6 +15,10 @@
     @apply border border-violet-600 text-violet-600 hover:bg-violet-100;
   }
 
+  .btn-danger {
+    @apply bg-red-500 text-white hover:bg-red-400;
+  }
+
   .status-btn {
     @apply py-0.5 px-2 text-slate-700 rounded-lg text-sm capitalize text-center
   }

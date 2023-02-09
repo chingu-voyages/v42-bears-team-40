@@ -21,6 +21,14 @@ const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
     formData.title === '' || formData.price === '' || formData.category === '';
   const imageRef = useRef(null);
 
+  const handleDeleteItem = async (e) => {
+    e.preventDefault();
+    await fetch(`/api/item/${formData.itemId}`, {
+      method: 'DELETE',
+    });
+    router.back();
+  };
+
   return (
     <div className='form-center'>
       <div className='bg-gray-ish py-4 rounded-lg drop-shadow-lg text-slate-700'>
@@ -128,6 +136,15 @@ const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
           >
             {isEditing ? 'Edit Item' : 'Add Item'}
           </button>
+          {isEditing && (
+            <button
+              className='btn btn-danger m-2'
+              type='submit'
+              onClick={handleDeleteItem}
+            >
+              Delete Item
+            </button>
+          )}
         </form>
       </div>
     </div>
