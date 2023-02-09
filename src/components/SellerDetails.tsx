@@ -107,7 +107,7 @@ const SellerDetails = ({
   return isUpdating ? (
     <form className='p-2 w-full'>
       <div className='w-full flex'>
-        <label htmlFor='name' className='font-semibold'>
+        <label htmlFor='name' className='font-semibold md:w-14'>
           Name
         </label>
         <input
@@ -119,7 +119,7 @@ const SellerDetails = ({
         />
       </div>
       <div className='w-full flex'>
-        <label htmlFor='email' className='font-semibold'>
+        <label htmlFor='email' className='font-semibold md:w-14'>
           Email{' '}
         </label>
         <input
@@ -131,7 +131,7 @@ const SellerDetails = ({
         />
       </div>
       <div className='w-full flex'>
-        <label htmlFor='address' className='font-semibold'>
+        <label htmlFor='address' className='font-semibold md:w-14'>
           Street{' '}
         </label>
         <input
@@ -144,7 +144,7 @@ const SellerDetails = ({
       </div>
       <div className='flex-col md:flex md:flex-row'>
         <div className='w-full md:w-fit flex'>
-          <label htmlFor='city' className='font-semibold'>
+          <label htmlFor='city' className='font-semibold md:w-14'>
             City{' '}
           </label>
           <input
