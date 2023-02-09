@@ -5,6 +5,7 @@ import { ItemType } from '../../../../components/Item';
 import { prisma } from '../../../../server/db';
 import { useSession } from 'next-auth/react';
 import ItemForm from '../../../../components/ItemForm';
+import { handleImagePhoto } from '../../../../utils/updatePhoto';
 
 type ItemProps = {
   item: ItemType;
@@ -21,16 +22,7 @@ export async function getServerSideProps({ params }) {
   };
 }
 const EditItem: React.FC = ({ item }: ItemProps) => {
-  const {
-    title,
-    description,
-    price,
-    picture,
-    status,
-    category,
-    itemId,
-    userId,
-  } = item;
+  const { title, description, price, status, category, itemId, userId } = item;
   const { data: session } = useSession();
 
   useEffect(() => {
@@ -45,7 +37,6 @@ const EditItem: React.FC = ({ item }: ItemProps) => {
     title,
     description: description || '',
     price: price || '',
-    picture: picture || '',
     status,
     category,
   };
@@ -59,18 +50,17 @@ const EditItem: React.FC = ({ item }: ItemProps) => {
     });
   };
 
-  const submitItem = async (e) => {
+  const submitItem = async (e: React.SyntheticEvent, imageRef) => {
     e.preventDefault();
     let price = Number(itemForm.price);
-    const body = {
-      ...itemForm,
-      price,
-    };
+    const body = { ...itemForm, price };
     try {
-      await fetch(`/api/item/${itemId}`, {
+      const response = await fetch(`/api/item/${itemId}`, {
         method: 'PUT',
         body: JSON.stringify(body),
       });
+      const item = await response.json();
+      await handleImagePhoto(imageRef, item.itemId);
       Router.push(`/yard/${userId}`);
     } catch (error) {
       console.log(error);

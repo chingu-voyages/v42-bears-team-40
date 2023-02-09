@@ -3,6 +3,7 @@ import Router, { useRouter } from 'next/router';
 import Layout from '../../../../components/Layout';
 import { useSession } from 'next-auth/react';
 import ItemForm from '../../../../components/ItemForm';
+import { handleImagePhoto } from '../../../../utils/updatePhoto';
 
 const AddItem: React.FC = () => {
   const { data: session } = useSession();
@@ -16,7 +17,6 @@ const AddItem: React.FC = () => {
   const initialItem = {
     title: '',
     description: '',
-    picture: '',
     category: '',
     price: '',
   };
@@ -30,20 +30,24 @@ const AddItem: React.FC = () => {
     });
   };
 
-  const submitData = async (e: React.SyntheticEvent) => {
-    let price = Number(itemForm.price);
+  const submitData = async (e: React.SyntheticEvent, imageRef) => {
     e.preventDefault();
+    let price = Number(itemForm.price);
+    const body = { ...itemForm, price };
     try {
-      const body = { ...itemForm, price };
-      await fetch('/api/item', {
+      const response = await fetch('/api/item', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
+      const { itemId } = await response.json();
+      await handleImagePhoto(imageRef, itemId);
       await Router.push(`/yard/${id}`);
     } catch (error) {
       console.log(error);
     }
+
+    // handleImagePhoto()
   };
 
   return (
