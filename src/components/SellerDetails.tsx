@@ -55,10 +55,10 @@ const SellerDetails = ({
     e.preventDefault();
     try {
       // Update user name & email
-      const response = await fetch(`/api/seller-name-email/${id}`, {
+      const response = await fetch(`/api/seller/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userForm),
+        body: JSON.stringify({ userForm, type: 'update-profile' }),
       });
       const user = response.json();
       const { address, city, state, zipCode } = userForm;
@@ -66,7 +66,7 @@ const SellerDetails = ({
       let sellerAddress;
       // If new address and no address yet, create an address
       if (!hasAddress && updatedAddress) {
-        const response = await fetch(`/api/seller-address`, {
+        const response = await fetch(`/api/seller/${id}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -81,7 +81,7 @@ const SellerDetails = ({
       }
       // If new address and had an address, update address
       if (hasAddress && updatedAddress) {
-        const response = await fetch(`/api/seller-address/${id}`, {
+        const response = await fetch(`/api/seller/${id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -89,6 +89,7 @@ const SellerDetails = ({
             city,
             state,
             zipCode,
+            type: 'update-address',
           }),
         });
         sellerAddress = await response.json();

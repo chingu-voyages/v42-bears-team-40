@@ -119,7 +119,7 @@ const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
           <button
             className={
               notComplete
-                ? 'btn btn-primary m-2 opacity-70 bg-slate-400 hover:bg-slate-400'
+                ? 'btn btn-primary m-2 opacity-70 bg-slate-400 border-2 border-violet-600 hover:bg-slate-400'
                 : 'btn btn-primary m-2'
             }
             type='submit'
