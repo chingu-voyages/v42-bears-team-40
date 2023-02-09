@@ -10,7 +10,7 @@ const Navbar = () => {
   // const home = session ? `/yard/${id}` : '/';
 
   return (
-    <nav className='h-16 bg-dark-green text-gray-50 tracking-wide md:text-lg'>
+    <nav className='h-16 bg-dark-green text-gray-50 tracking-wide md:text-lg drop-shadow-lg'>
       <div className='nav-center flex justify-between h-full items-center mx-6 md:mx-10'>
         <div className='logo hover:text-custom-yellow'>
           <a href={'/'}>Yard Sale</a>

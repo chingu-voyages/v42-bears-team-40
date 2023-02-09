@@ -35,7 +35,6 @@ const AddItem: React.FC = () => {
     e.preventDefault();
     try {
       const body = { ...itemForm, price };
-      console.log('submitting', body);
       await fetch('/api/item', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -46,7 +45,7 @@ const AddItem: React.FC = () => {
       console.log(error);
     }
   };
-  console.log(itemForm);
+
   return (
     <Layout>
       <ItemForm
