@@ -53,14 +53,15 @@ const EditItem: React.FC = ({ item }: ItemProps) => {
   const submitItem = async (e: React.SyntheticEvent, imageRef) => {
     e.preventDefault();
     let price = Number(itemForm.price);
-    const body = { ...itemForm, price };
+    const item = { ...itemForm, price };
     try {
       const response = await fetch(`/api/item/${itemId}`, {
         method: 'PUT',
-        body: JSON.stringify(body),
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ item, type: 'update-item' }),
       });
-      const item = await response.json();
-      await handleImagePhoto(imageRef, item.itemId);
+      const updatedItem = await response.json();
+      await handleImagePhoto(imageRef, updatedItem.itemId);
       Router.push(`/yard/${userId}`);
     } catch (error) {
       console.log(error);

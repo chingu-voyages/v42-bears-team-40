@@ -1,7 +1,8 @@
 export default async function getSeller(id) {
   try {
-    const response = await fetch(`../api/seller-data/${id}`);
-    const { user, address } = await response.json();
+    const response = await fetch(`../api/seller/${id}`);
+    const { user } = await response.json();
+    const address = user.address[0];
     const seller = {
       name: user.name,
       email: user.email,

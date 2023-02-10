@@ -21,6 +21,14 @@ const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
     formData.title === '' || formData.price === '' || formData.category === '';
   const imageRef = useRef(null);
 
+  const handleDeleteItem = async (e) => {
+    e.preventDefault();
+    await fetch(`/api/item/${formData.itemId}`, {
+      method: 'DELETE',
+    });
+    router.back();
+  };
+
   return (
     <div className='form-center'>
       <div className='bg-gray-ish py-4 rounded-lg drop-shadow-lg text-slate-700'>
@@ -119,7 +127,7 @@ const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
           <button
             className={
               notComplete
-                ? 'btn btn-primary m-2 opacity-70 bg-slate-400 hover:bg-slate-400'
+                ? 'btn btn-primary m-2 opacity-70 bg-slate-400 border-2 border-violet-600 hover:bg-slate-400'
                 : 'btn btn-primary m-2'
             }
             type='submit'
@@ -128,6 +136,15 @@ const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
           >
             {isEditing ? 'Edit Item' : 'Add Item'}
           </button>
+          {isEditing && (
+            <button
+              className='btn btn-danger m-2'
+              type='submit'
+              onClick={handleDeleteItem}
+            >
+              Delete Item
+            </button>
+          )}
         </form>
       </div>
     </div>

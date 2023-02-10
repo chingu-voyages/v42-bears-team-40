@@ -55,10 +55,10 @@ const SellerDetails = ({
     e.preventDefault();
     try {
       // Update user name & email
-      const response = await fetch(`/api/seller-name-email/${id}`, {
+      const response = await fetch(`/api/seller/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userForm),
+        body: JSON.stringify({ userForm, type: 'update-profile' }),
       });
       const user = response.json();
       const { address, city, state, zipCode } = userForm;
@@ -66,7 +66,7 @@ const SellerDetails = ({
       let sellerAddress;
       // If new address and no address yet, create an address
       if (!hasAddress && updatedAddress) {
-        const response = await fetch(`/api/seller-address`, {
+        const response = await fetch(`/api/seller/${id}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -81,7 +81,7 @@ const SellerDetails = ({
       }
       // If new address and had an address, update address
       if (hasAddress && updatedAddress) {
-        const response = await fetch(`/api/seller-address/${id}`, {
+        const response = await fetch(`/api/seller/${id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -89,6 +89,7 @@ const SellerDetails = ({
             city,
             state,
             zipCode,
+            type: 'update-address',
           }),
         });
         sellerAddress = await response.json();
@@ -106,7 +107,7 @@ const SellerDetails = ({
   return isUpdating ? (
     <form className='p-2 w-full'>
       <div className='w-full flex'>
-        <label htmlFor='name' className='font-semibold'>
+        <label htmlFor='name' className='font-semibold md:w-14'>
           Name
         </label>
         <input
@@ -118,7 +119,7 @@ const SellerDetails = ({
         />
       </div>
       <div className='w-full flex'>
-        <label htmlFor='email' className='font-semibold'>
+        <label htmlFor='email' className='font-semibold md:w-14'>
           Email{' '}
         </label>
         <input
@@ -130,7 +131,7 @@ const SellerDetails = ({
         />
       </div>
       <div className='w-full flex'>
-        <label htmlFor='address' className='font-semibold'>
+        <label htmlFor='address' className='font-semibold md:w-14'>
           Street{' '}
         </label>
         <input
@@ -143,7 +144,7 @@ const SellerDetails = ({
       </div>
       <div className='flex-col md:flex md:flex-row'>
         <div className='w-full md:w-fit flex'>
-          <label htmlFor='city' className='font-semibold'>
+          <label htmlFor='city' className='font-semibold md:w-14'>
             City{' '}
           </label>
           <input

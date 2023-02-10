@@ -27,17 +27,17 @@ export const handleProfilePhoto = async (
   handleSetImage,
   setUpdatePhoto
 ) => {
-  const newImage = uploadPhoto(imageRef);
+  const newImage = await uploadPhoto(imageRef);
   if (!newImage) {
     setUpdatePhoto(false);
     return;
   }
   const postProfileImage = async () => {
     try {
-      const response = await fetch(`/api/seller-image/${id}`, {
+      const response = await fetch(`/api/seller/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newImage),
+        body: JSON.stringify({ image: newImage, type: 'update-image' }),
       });
       const { user } = await response.json();
       handleSetImage(user.image);
@@ -54,10 +54,10 @@ export const handleImagePhoto = async (imageRef, itemId) => {
   if (!newImage) return;
   const updateItemImage = async () => {
     try {
-      await fetch(`/api/item-image/${itemId}`, {
+      await fetch(`/api/item/${itemId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newImage),
+        body: JSON.stringify({ picture: newImage, type: 'update-item-image' }),
       });
     } catch (error) {
       console.error(error);
