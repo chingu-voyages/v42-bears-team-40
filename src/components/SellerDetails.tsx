@@ -1,7 +1,5 @@
 import { useState, Dispatch, SetStateAction, useRef } from 'react';
 import { User, Address } from '@prisma/client';
-import addressIcon from '../styles/images/address.png';
-import mailIcon from '../styles/images/mail.png';
 import checkAddressAdded from '../utils/checkAddress';
 import getSeller from '../utils/getSeller';
 import { handleProfilePhoto } from '../utils/updatePhoto';
@@ -196,11 +194,15 @@ const SellerDetails = ({
       </p>
       <div className='text-sm '>
         <div className='flex items-center'>
-          <img className='h-6 mr-3' src={mailIcon.src} alt='email icon' />
+          <img className='h-6 mr-3' src='/images/mail.png' alt='email icon' />
           <p className='text-slate-600'>{userInfo.email}</p>
         </div>
         <div className='flex items-center'>
-          <img className='h-6 mr-3' src={addressIcon.src} alt='address icon' />
+          <img
+            className='h-6 mr-3'
+            src='/images/address.png'
+            alt='address icon'
+          />
           {hasAddress ? (
             <div className='text-slate-700 pt-2'>
               <p>{userInfo.address}</p>
