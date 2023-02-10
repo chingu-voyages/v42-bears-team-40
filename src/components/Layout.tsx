@@ -34,7 +34,7 @@ const Layout = ({ children }: LayoutProps) => {
           </button>
           <header>
             <Image
-              src='/images/yard-sale-grass.png'
+              src='/images/yard-sale-grass-1.png'
               alt='logo'
               height={200}
               width={200}
