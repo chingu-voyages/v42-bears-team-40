@@ -16,7 +16,7 @@ const Navbar = ({ handleToggle }: NavProps) => {
 
   return (
     <nav className='h-24 bg-dark-green text-gray-50 tracking-wide md:text-lg drop-shadow-lg'>
-      <div className='nav-center flex justify-between h-full items-center mx-12'>
+      <div className='nav-center flex justify-between h-full items-center mx-12 lg:mx-24'>
         <div className='logo flex'>
           <Link href='/'>
             <Image
