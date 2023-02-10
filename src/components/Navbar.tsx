@@ -8,18 +8,19 @@ const Navbar = () => {
   const id = session?.user?.id;
   const router = useRouter();
   const isAdding = router.pathname.includes('add-item');
-  // const home = session ? `/yard/${id}` : '/';
 
   return (
-    <nav className='h-24 bg-dark-green text-gray-50 tracking-wide md:text-lg'>
+    <nav className='h-24 bg-dark-green text-gray-50 tracking-wide md:text-lg drop-shadow-lg'>
       <div className='nav-center flex justify-between h-full items-center mx-6 md:mx-10'>
         <div className='logo hover:text-custom-yellow flex items-center'>
-          <Image
-            src='/images/yard-sale.png'
-            alt='logo'
-            height={150}
-            width={150}
-          />
+          <Link href='/'>
+            <Image
+              src='/images/yard-sale.png'
+              alt='logo'
+              height={150}
+              width={150}
+            />
+          </Link>
         </div>
         <div className='nav-links flex justify-between space-x-4 md:space-x-8'>
           {session ? (

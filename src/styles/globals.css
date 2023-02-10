@@ -15,6 +15,10 @@
     @apply border border-violet-600 text-violet-600 hover:bg-violet-100;
   }
 
+  .btn-danger {
+    @apply bg-red-500 text-white hover:bg-red-400;
+  }
+
   .status-btn {
     @apply py-0.5 px-2 text-slate-700 rounded-lg text-sm capitalize text-center
   }
@@ -69,7 +73,11 @@
     @apply text-dark-green tracking-wide border-2 rounded w-32 px-2 py-1 border-dark-green hover:bg-custom-yellow text-sm mt-2
   }
 
-  .form-item {
-    @apply m-1 border border-violet-600 rounded-sm;
+  .form-input {
+    @apply my-2 mx-auto p-2 tracking-wide block w-8/12 rounded
+  }
+
+  .form-center {
+    @apply w-9/12 mx-auto py-10 text-center
   }
 }

@@ -1,26 +1,43 @@
 import axios from 'axios';
+import { MutableRefObject } from 'react';
 
-export const handleUpdatePhoto = async (
-  imageRef,
-  id,
-  handleSetImage,
-  setUpdatePhoto
-) => {
-  const file = imageRef.current.files[0];
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('upload_preset', 'bpa2smys');
-  const postImage = async () => {
+const uploadPhoto = async (imageRef) => {
+  if (imageRef.current.files[0]) {
+    const file = imageRef.current.files[0];
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'bpa2smys');
     try {
       const { data } = await axios.post(
         'https://api.cloudinary.com/v1_1/ljmccode/image/upload',
         formData
       );
-      const newImage = data.secure_url;
-      const response = await fetch(`/api/seller-image/${id}`, {
+      return data.secure_url;
+    } catch (error) {
+      console.error(error);
+    }
+  } else {
+    return false;
+  }
+};
+
+export const handleProfilePhoto = async (
+  imageRef: MutableRefObject<HTMLInputElement>,
+  id,
+  handleSetImage,
+  setUpdatePhoto
+) => {
+  const newImage = await uploadPhoto(imageRef);
+  if (!newImage) {
+    setUpdatePhoto(false);
+    return;
+  }
+  const postProfileImage = async () => {
+    try {
+      const response = await fetch(`/api/seller/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(newImage),
+        body: JSON.stringify({ image: newImage, type: 'update-image' }),
       });
       const { user } = await response.json();
       handleSetImage(user.image);
@@ -29,5 +46,22 @@ export const handleUpdatePhoto = async (
       console.error(error);
     }
   };
-  postImage();
+  postProfileImage();
+};
+
+export const handleImagePhoto = async (imageRef, itemId) => {
+  const newImage = await uploadPhoto(imageRef);
+  if (!newImage) return;
+  const updateItemImage = async () => {
+    try {
+      await fetch(`/api/item/${itemId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ picture: newImage, type: 'update-item-image' }),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  updateItemImage();
 };

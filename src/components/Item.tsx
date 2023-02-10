@@ -37,7 +37,11 @@ const Item = ({ item }: ItemProps) => {
       <div className='w-full drop-shadow-sm flex items-center justify-center h-80 relative group'>
         <img
           className='absolute object-cover h-full w-full group-hover:opacity-20'
-          src={picture}
+          src={
+            picture
+              ? picture
+              : 'https://res.cloudinary.com/ljmccode/image/upload/v1675968428/tkw4r1prtnf2mrkvc4t2.jpg'
+          }
           alt={title}
         />
         <div className='card-hover relative mx-4 flex-col text-center opacity-0 group-hover:opacity-100'>
