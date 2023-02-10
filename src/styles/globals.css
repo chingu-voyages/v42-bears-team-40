@@ -46,7 +46,7 @@
 
   .login-background {
     @apply fixed z-10 left-0 top-0 w-full h-screen overflow-x-auto overflow-y-hidden bg-cover bg-no-repeat;
-    background-image: url('./images/cool-background.png');
+    background-image: url('/images/cool-background.png');
   }
 
   .login-body {

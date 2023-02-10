@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import userAvatar from '../styles/images/user-avatar.png';
 
 type Props = {
   image?: string;
@@ -17,17 +16,17 @@ const SellerImg = ({ image, hidden }: Props) => {
     >
       {image ? (
         <Image
-          className="w-full h-full max-w-36 max-h-36 object-cover rounded-full overflow-hidden"
+          className='w-full h-full max-w-36 max-h-36 object-cover rounded-full overflow-hidden'
           src={image}
-          alt="Seller Picture"
+          alt='Seller Picture'
           width={144}
           height={144}
         />
       ) : (
         <img
-          className="w-full h-3/4 object-cover"
-          src={userAvatar.src}
-          alt="Default"
+          className='w-full h-3/4 object-cover'
+          src='/images/user-avatar.png'
+          alt='Default'
         />
       )}
     </div>
