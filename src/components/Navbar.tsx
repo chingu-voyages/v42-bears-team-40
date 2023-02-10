@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 const Navbar = () => {
   const { data: session } = useSession();
@@ -10,10 +11,15 @@ const Navbar = () => {
   // const home = session ? `/yard/${id}` : '/';
 
   return (
-    <nav className='h-16 bg-dark-green text-gray-50 tracking-wide md:text-lg'>
+    <nav className='h-24 bg-dark-green text-gray-50 tracking-wide md:text-lg'>
       <div className='nav-center flex justify-between h-full items-center mx-6 md:mx-10'>
-        <div className='logo hover:text-custom-yellow'>
-          <a href={'/'}>Yard Sale</a>
+        <div className='logo hover:text-custom-yellow flex items-center'>
+          <Image
+            src='/images/yard-sale.png'
+            alt='logo'
+            height={150}
+            width={150}
+          />
         </div>
         <div className='nav-links flex justify-between space-x-4 md:space-x-8'>
           {session ? (
