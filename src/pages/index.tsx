@@ -1,6 +1,8 @@
+import React, { useState } from 'react';
 import { GetStaticProps } from 'next';
 import { prisma } from '../server/db';
 import Layout from '../components/Layout';
+import SearchBar from '../components/SearchBar';
 import Item from '../components/Item';
 import { ItemType } from '../components/Item';
 
@@ -14,21 +16,32 @@ type Props = {
   items: ItemType[];
 };
 const Search: React.FC<Props> = (props) => {
+  const [filteredItems, setFilteredItems] = useState([]);
+  const handleSearch = (searchTerm) => {
+    setFilteredItems(
+      props.items.filter(
+        (item) =>
+          item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          item.description.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    );
+  };
   return (
     <Layout>
-      <section className='item-section'>
+      <section className='item-section grid justify-center'>
+        <SearchBar handleSearch={handleSearch} />
         <div className='item-section-center'>
-          {props.items
-            .filter((singleItem) => singleItem.status !== 'sold')
-            .map((singleItem) => (
-              <div key={singleItem.itemId} className='flex justify-center'>
-                <Item item={singleItem} />
-              </div>
+          {filteredItems.length > 0 &&
+            filteredItems.map((singleItem) => (
+              <Item key={singleItem.itemId} item={singleItem} />
+            ))}
+          {filteredItems.length == 0 &&
+            props.items.map((singleItem) => (
+              <Item key={singleItem.itemId} item={singleItem} />
             ))}
         </div>
       </section>
     </Layout>
   );
 };
-
 export default Search;
