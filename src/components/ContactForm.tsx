@@ -45,7 +45,7 @@ const ContactForm = ({ user, items: sellerItems }: FormProps) => {
   };
 
   return (
-    <div className='form-center w-9/12 mx-auto py-10 text-center'>
+    <div className='form-center'>
       <div className='bg-gray-ish py-4 rounded'>
         <h3 className='text-xl tracking-wide mb-4 font-semibold'>
           Contact Form
@@ -56,7 +56,7 @@ const ContactForm = ({ user, items: sellerItems }: FormProps) => {
         </p>
         <form onSubmit={(e) => handleSubmit(e)}>
           <input
-            className='my-2 mx-auto p-2 tracking-wide block w-8/12 rounded'
+            className='form-input'
             type='text'
             placeholder='Name'
             name='name'
@@ -64,7 +64,7 @@ const ContactForm = ({ user, items: sellerItems }: FormProps) => {
             onChange={(e) => setName(e.target.value)}
           />
           <input
-            className='my-2 mx-auto p-2 tracking-wide block w-8/12 rounded'
+            className='form-input'
             type='email'
             placeholder='Email'
             name='email'
@@ -72,7 +72,7 @@ const ContactForm = ({ user, items: sellerItems }: FormProps) => {
             onChange={(e) => setEmail(e.target.value)}
           />
           <textarea
-            className='my-2 mx-auto p-2 tracking-wide block w-8/12 rounded mb-4'
+            className='form-input mb-4'
             placeholder='Leave a message'
             name='message'
             value={message}
