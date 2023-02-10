@@ -5,7 +5,6 @@ const SearchBar = ({ handleSearch }) => {
   const handleChange = (e) => {
     e.preventDefault();
     handleSearch(searchText);
-    setSearchText('');
   };
 
   return (
@@ -19,8 +18,14 @@ const SearchBar = ({ handleSearch }) => {
             value={searchText}
             name='searchText'
           />
-          <button className='m-1 btn text-white bg-dark-green border'>
+          <button className='m-1 btn tracking-wide text-white bg-dark-green border hover:bg-custom-yellow'>
             Search
+          </button>
+          <button
+            className='m-1 btn tracking-wide text-dark-green bg-white border p-2 w-auto inline-block'
+            onClick={(e) => setSearchText('')}
+          >
+            Clear Search
           </button>
         </div>
       </form>
