@@ -32,6 +32,13 @@ const Item = ({ item }: ItemProps) => {
   const router = useRouter();
   const id = session?.user.id;
 
+  const limitTitle = (title) => {
+    if (title.length > 16) {
+      return `${title.slice(0, 14)}...`;
+    }
+    return title;
+  };
+
   return (
     <div className='item-card w-72 border shadow-lg rounded-lg sm:m-0 overflow-hidden group'>
       <div className='w-full drop-shadow-sm flex items-center justify-center h-80 relative group'>
@@ -70,9 +77,9 @@ const Item = ({ item }: ItemProps) => {
           <div className='flex justify-between'>
             <div>
               <div className='font-bold text-lg text-slate-700 tracking-wide'>
-                {title}
+                {limitTitle(title)}
               </div>
-              <div className='text-slate-500 tracking-wide text-sm'>
+              <div className='text-slate-500 tracking-wide text-sm capitalize'>
                 {category}
               </div>
             </div>

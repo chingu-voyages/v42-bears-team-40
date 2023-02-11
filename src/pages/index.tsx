@@ -26,6 +26,7 @@ const Search: React.FC<Props> = (props) => {
       )
     );
   };
+
   return (
     <Layout>
       <section className='item-section grid justify-center'>

@@ -45,6 +45,7 @@ const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
               onChange={formChange}
               type='text'
               name='title'
+              maxLength={16}
               value={formData.title}
             />
           </div>
