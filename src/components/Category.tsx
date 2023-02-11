@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-const Category = () => {
-  const [category, setCategory] = useState('');
-
+const Category = ({ setCategory, handleCategoryFiltering }) => {
+  const handleCategory = (e) => {
+    e.preventDefault();
+    setCategory(e.target.value);
+    handleCategoryFiltering(e.target.value);
+  };
   return (
     <>
       <select
-        value={category}
         className='m-1 p-2 bg-white border border-dark-green rounded-lg'
-        onChange={(e) => setCategory(e.target.value)}
+        onChange={(e) => handleCategory(e)}
       >
         <option value='all'>Search By Category</option>
         <option value='books'>Books</option>

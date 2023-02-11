@@ -17,6 +17,7 @@ type Props = {
   items: ItemType[];
 };
 const Search: React.FC<Props> = (props) => {
+  const [currentCategory, setCurrentCategory] = useState('all');
   const [filteredItems, setFilteredItems] = useState([]);
   const handleSearch = (searchTerm) => {
     setFilteredItems(
@@ -27,12 +28,23 @@ const Search: React.FC<Props> = (props) => {
       )
     );
   };
+  const handleCategoryFiltering = (currentCategory) => {
+    if (currentCategory !== '' || currentCategory !== 'all')
+      setFilteredItems(
+        props.items.filter((item) => item.category === currentCategory)
+      );
+    setCurrentCategory('all');
+  };
+
   return (
     <Layout>
       <section className='item-section grid justify-center'>
         <div className='row-auto'>
           <SearchBar handleSearch={handleSearch} />
-          <Category />
+          <Category
+            setCategory={setCurrentCategory}
+            handleCategoryFiltering={handleCategoryFiltering}
+          />
         </div>
         <div className='item-section-center'>
           {filteredItems.length > 0 &&
