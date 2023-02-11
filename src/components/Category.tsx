@@ -2,26 +2,24 @@ import React, { useState } from 'react';
 
 const Category = () => {
   const [category, setCategory] = useState('');
-  const handleCategoryChange = (e) => {
-    e.preventDefault();
-    setCategory(e.target.value);
-    console.log(category);
-  };
+
   return (
     <>
-      {category}
       <select
-        name='category'
+        value={category}
         className='m-1 p-2 bg-white border border-dark-green rounded-lg'
-        onChange={(e) => handleCategoryChange}
+        onChange={(e) => setCategory(e.target.value)}
       >
-        <option value=''>Search By Category</option>
+        <option value='all'>Search By Category</option>
         <option value='books'>Books</option>
         <option value='clothing'>Clothing</option>
         <option value='crafts'>Crafts</option>
         <option value='electronics'>Electronics</option>
         <option value='furniture'>Furniture</option>
+        <option value='games'>Games</option>
         <option value='kitchen'>Kitchen</option>
+        <option value='movies'>Movies</option>
+        <option value='music'>Music</option>
         <option value='other'>Other</option>
         <option value='outdoors'>Outdoors</option>
         <option value='sports'>Sports</option>
