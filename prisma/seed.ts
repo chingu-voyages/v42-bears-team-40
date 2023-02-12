@@ -1,6 +1,7 @@
 import { ItemType } from './../src/components/Item';
 import { PrismaClient } from '@prisma/client';
 import { faker } from '@faker-js/faker';
+import { data } from '../utils/data';
 
 const prisma = new PrismaClient();
 
@@ -8,27 +9,6 @@ async function main() {
   await prisma.item.deleteMany({});
   const items: ItemType[] = [];
 
-  const numOfItems = 50;
-  const categoryOptions = faker.helpers.arrayElements([
-    'books',
-    'clothing',
-    'crafts',
-    'electronics',
-    'furniture',
-    'games',
-    'kitchen',
-    'movies',
-    'music',
-    'other',
-    'outdoors',
-    'sports',
-    'toys',
-  ]);
-  const statusOptions = faker.helpers.arrayElements([
-    'available',
-    'pending',
-    'sold',
-  ]);
   const userIdOptions = [
     'cldt7aeh80000s4tlqapgqen2',
     'cldt835qf000amg08n1ysuczt',
@@ -40,19 +20,19 @@ async function main() {
     return options[Math.floor(Math.random() * options.length)];
   };
 
-  for (let i = 0; i < numOfItems; i++) {
-    const item: ItemType = {
+  data.forEach((item) => {
+    const newItem: ItemType = {
       itemId: faker.datatype.uuid(),
-      title: faker.commerce.productName(),
+      title: item.title,
       description: faker.commerce.productDescription(),
-      picture: faker.image.image(undefined, undefined, true),
+      picture: item.picture,
       price: Number(faker.commerce.price(100, 200, 0)),
-      status: getRandom(statusOptions),
-      category: getRandom(categoryOptions),
+      status: item.status,
+      category: item.category,
       userId: getRandom(userIdOptions),
     };
-    items.push(item);
-  }
+    items.push(newItem);
+  });
 
   const addItems = async () => await prisma.item.createMany({ data: items });
   addItems();
