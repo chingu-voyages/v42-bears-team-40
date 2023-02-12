@@ -29,7 +29,7 @@ const ContactForm = ({ user, items: sellerItems }: FormProps) => {
     try {
       axios.defaults.headers.post['Content-Type'] = 'application/json';
       await axios
-        .post(`https://formsubmit.co/ajax/lmcsay@gmail.com`, {
+        .post(`https://formsubmit.co/ajax/${user.email}`, {
           name,
           email,
           message,
