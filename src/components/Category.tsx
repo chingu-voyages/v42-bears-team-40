@@ -9,7 +9,7 @@ const Category = ({ setCategory, handleCategoryFiltering }) => {
   return (
     <>
       <select
-        className='m-1 p-2 bg-white border border-dark-green rounded-lg'
+        className='m-1 p-2 mx-auto bg-white text-slate-700 border w-full md:w-4/12 md:h-10 md:m-2 border-dark-green rounded-lg'
         onChange={(e) => handleCategory(e)}
       >
         <option value='all'>Search By Category</option>
