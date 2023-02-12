@@ -1,13 +1,13 @@
-import { Status } from '@prisma/client';
+import { Status, Category } from '@prisma/client';
 
-type data = {
+type SeedData = {
   title: string;
-  category: string;
+  category: Category;
   picture: string;
   status: Status;
 };
 
-export const data: data[] = [
+export const seedData: SeedData[] = [
   {
     title: 'Book Collection',
     category: 'books',

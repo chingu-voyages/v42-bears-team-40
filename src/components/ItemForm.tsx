@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { useState, useRef, Dispatch, SetStateAction } from 'react';
 import { useRouter } from 'next/router';
-import { useRef } from 'react';
-import { Dispatch, SetStateAction } from 'react';
+import { Category } from '@prisma/client';
 import Alert from './Alert';
 
+const categories = ['Select Category', ...Object.keys(Category)];
+
 type Props = {
-  formChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  formChange: (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => void;
   handleSubmitForm: (
     e: React.SyntheticEvent,
     imageRef,
@@ -31,7 +36,9 @@ const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
   const router = useRouter();
   const isEditing = !router.pathname.includes('add-item');
   const notComplete =
-    formData.title === '' || formData.price === '' || formData.category === '';
+    formData.title === '' ||
+    formData.price === '' ||
+    formData.category === 'Select Category';
   const imageRef = useRef(null);
 
   const handleDeleteItem = async (e) => {
@@ -79,13 +86,29 @@ const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
             <label className='font-semibold text-lg'>
               Category<span className='text-red-700'>*</span>
             </label>
-            <input
+            {/* <input
               className='form-input w-full text-slate-800'
               onChange={formChange}
               type='text'
               name='category'
               value={formData.category}
-            />
+            /> */}
+            <select
+              className='form-input w-full text-slate-800 capitalize'
+              onChange={(e) => formChange(e)}
+              name='category'
+              value={
+                formData.category.length > 0
+                  ? formData.category
+                  : 'Select Category'
+              }
+            >
+              {categories.map((category, index) => (
+                <option key={index} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
           </div>
           <div className='text-left'>
             <label className='font-semibold text-lg'>Description</label>

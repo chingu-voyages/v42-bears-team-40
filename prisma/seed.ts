@@ -1,13 +1,12 @@
-import { ItemType } from './../src/components/Item';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, Item } from '@prisma/client';
 import { faker } from '@faker-js/faker';
-import { data } from '../utils/data';
+import { seedData } from '../utils/data';
 
 const prisma = new PrismaClient();
 
 async function main() {
   await prisma.item.deleteMany({});
-  const items: ItemType[] = [];
+  const items: Item[] = [];
 
   const userIdOptions = [
     'cldt7aeh80000s4tlqapgqen2',
@@ -20,8 +19,8 @@ async function main() {
     return options[Math.floor(Math.random() * options.length)];
   };
 
-  data.forEach((item) => {
-    const newItem: ItemType = {
+  seedData.forEach((item) => {
+    const newItem: Item = {
       itemId: faker.datatype.uuid(),
       title: item.title,
       description: faker.commerce.productDescription(),
