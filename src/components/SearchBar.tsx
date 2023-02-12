@@ -5,6 +5,7 @@ const SearchBar = ({ handleSearch }) => {
   const handleChange = (e) => {
     e.preventDefault();
     handleSearch(searchText);
+    setSearchText('');
   };
 
   return (
