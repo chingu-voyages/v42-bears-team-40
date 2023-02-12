@@ -1,9 +1,23 @@
+import { useState, useRef, Dispatch, SetStateAction } from 'react';
 import { useRouter } from 'next/router';
-import { useRef } from 'react';
+import { Category } from '@prisma/client';
+import Alert from './Alert';
+
+const categories = ['Select Category', ...Object.keys(Category)];
 
 type Props = {
-  formChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmitForm: (e: React.SyntheticEvent, imageRef) => Promise<void>;
+  formChange: (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => void;
+  handleSubmitForm: (
+    e: React.SyntheticEvent,
+    imageRef,
+    setAlertType: Dispatch<SetStateAction<string>>,
+    setMessage: Dispatch<SetStateAction<string>>,
+    setShowAlert: Dispatch<SetStateAction<boolean>>
+  ) => Promise<void>;
   formData: {
     itemId?: string;
     title: string;
@@ -15,10 +29,16 @@ type Props = {
 };
 
 const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
+  const [showAlert, setShowAlert] = useState(true);
+  const [message, setMessage] = useState('');
+  const [alertType, setAlertType] = useState('');
+
   const router = useRouter();
   const isEditing = !router.pathname.includes('add-item');
   const notComplete =
-    formData.title === '' || formData.price === '' || formData.category === '';
+    formData.title === '' ||
+    formData.price === '' ||
+    formData.category === 'Select Category';
   const imageRef = useRef(null);
 
   const handleDeleteItem = async (e) => {
@@ -36,6 +56,7 @@ const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
           {isEditing ? 'Edit your Item' : 'Add An Item'}
         </h3>
         <form className='w-9/12 mx-auto'>
+          {showAlert && <Alert alertType={alertType} message={message} />}
           <div className='text-left'>
             <label className='font-semibold text-lg'>
               Name<span className='text-red-700'>*</span>
@@ -45,6 +66,7 @@ const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
               onChange={formChange}
               type='text'
               name='title'
+              maxLength={16}
               value={formData.title}
             />
           </div>
@@ -64,13 +86,29 @@ const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
             <label className='font-semibold text-lg'>
               Category<span className='text-red-700'>*</span>
             </label>
-            <input
+            {/* <input
               className='form-input w-full text-slate-800'
               onChange={formChange}
               type='text'
               name='category'
               value={formData.category}
-            />
+            /> */}
+            <select
+              className='form-input w-full text-slate-800 capitalize'
+              onChange={(e) => formChange(e)}
+              name='category'
+              value={
+                formData.category.length > 0
+                  ? formData.category
+                  : 'Select Category'
+              }
+            >
+              {categories.map((category, index) => (
+                <option key={index} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
           </div>
           <div className='text-left'>
             <label className='font-semibold text-lg'>Description</label>
@@ -131,7 +169,15 @@ const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
                 : 'btn btn-primary m-2'
             }
             type='submit'
-            onClick={(e) => handleSubmitForm(e, imageRef)}
+            onClick={(e) =>
+              handleSubmitForm(
+                e,
+                imageRef,
+                setAlertType,
+                setMessage,
+                setShowAlert
+              )
+            }
             disabled={notComplete}
           >
             {isEditing ? 'Edit Item' : 'Add Item'}

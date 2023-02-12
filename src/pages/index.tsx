@@ -39,7 +39,7 @@ const Search: React.FC<Props> = (props) => {
   return (
     <Layout>
       <section className='item-section grid justify-center'>
-        <div className='row-auto'>
+        <div className='flex flex-col md:flex-row md:justify-around pb-4'>
           <SearchBar handleSearch={handleSearch} />
           <Category
             setCategory={setCurrentCategory}

@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
 import Router, { useRouter } from 'next/router';
-import Layout from '../../../../components/Layout';
 import { useSession } from 'next-auth/react';
+import Layout from '../../../../components/Layout';
 import ItemForm from '../../../../components/ItemForm';
 import { handleImagePhoto } from '../../../../utils/updatePhoto';
+import {
+  handleAlertSuccess,
+  handleAlertDanger,
+} from '../../../../utils/handleAlert';
 
 const AddItem: React.FC = () => {
   const { data: session } = useSession();
@@ -30,7 +34,13 @@ const AddItem: React.FC = () => {
     });
   };
 
-  const submitData = async (e: React.SyntheticEvent, imageRef) => {
+  const submitData = async (
+    e: React.SyntheticEvent,
+    imageRef,
+    setAlertType,
+    setMessage,
+    setShowAlert
+  ) => {
     e.preventDefault();
     let price = Number(itemForm.price);
     const body = { ...itemForm, price };
@@ -42,12 +52,22 @@ const AddItem: React.FC = () => {
       });
       const { itemId } = await response.json();
       await handleImagePhoto(imageRef, itemId);
-      await Router.push(`/yard/${id}`);
+      handleAlertSuccess(
+        setAlertType,
+        setMessage,
+        setShowAlert,
+        'Item successfully added!'
+      );
+      setTimeout(() => Router.push(`/yard/${id}`), 3000);
     } catch (error) {
+      handleAlertDanger(
+        setAlertType,
+        setMessage,
+        setShowAlert,
+        'There was an issue adding your item'
+      );
       console.log(error);
     }
-
-    // handleImagePhoto()
   };
 
   return (
