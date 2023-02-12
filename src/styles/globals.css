@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+  .min-height {
+    min-height: calc(100vh - 96px);
+  }
+
+  /* Buttons */
   .btn {
     @apply w-28 p-2 text-center tracking-wide rounded-lg hover:transition hover:duration-300;
   }
@@ -15,17 +20,45 @@
     @apply border border-violet-600 text-violet-600 hover:bg-violet-100;
   }
 
+  .btn-danger {
+    @apply bg-red-500 text-white hover:bg-red-400;
+  }
+
+  .status-btn {
+    @apply py-0.5 px-2 text-slate-700 rounded-lg text-sm capitalize text-center
+  }
+
+  .pending-btn {
+    background: #f0db9e;
+   
+  }
+
+  .sold-btn {
+    background: #f6c3c3;
+  }
+
+  .alert {
+    @apply border rounded my-2 p-2 tracking-wide;
+  }
+
+  /* Items */
   .item-section {
-    @apply sm:m-8;
+    @apply grid p-8 mx-auto;
   }
 
   .item-section-center {
-    @apply max-w-5xl sm:grid sm:grid-cols-2 sm:gap-6 md:grid-cols-3;
+    @apply max-w-5xl grid w-72 gap-8 sm:grid-cols-2 sm:w-[608px] lg:grid-cols-3 lg:w-[928px]  mx-auto;
   }
+
+  .item-card:hover {
+    background: linear-gradient(125deg, rgba(249,188,96,0.7553396358543417) 43%, rgba(249,188,96,0.727328431372549) 66%);
+  }
+
+  /* Login */
 
   .login-background {
     @apply fixed z-10 left-0 top-0 w-full h-screen overflow-x-auto overflow-y-hidden bg-cover bg-no-repeat;
-    background-image: url('./images/cool-background.png');
+    background-image: url('/images/cool-background.png');
   }
 
   .login-body {
@@ -36,18 +69,45 @@
     @apply bg-blue-400 rounded py-2 pl-2 pr-4 text-white;
   }
 
+  /* Forms */
   .seller-input {
     @apply pl-2 rounded w-fit bg-slate-100 text-slate-700 border ml-1 flex-grow md:flex-grow-0
   }
 
-  .item-card:hover {
-    background: linear-gradient(
-      to right,
-      rgba(126, 213, 111, 0.85),
-      hsla(160, 64%, 43%, 0.85)
-    );
+  .form-input {
+    @apply my-2 mx-auto p-2 tracking-wide block w-8/12 rounded
   }
-  .form-item {
-    @apply m-1 border border-violet-600 rounded-sm;
+
+  .form-center {
+    @apply w-9/12 mx-auto py-10 text-center
+  }
+
+  /* Profile */
+  .profile-button {
+    @apply text-dark-green tracking-wide border-2 rounded w-32 px-2 py-1 border-dark-green hover:bg-custom-yellow text-sm mt-2
+  }
+
+  /* Sidebar */
+  .sidebar-container {
+    @apply fixed inset-0 flex justify-center items-center -z-10 opacity-0 ;
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  .show-sidebar {
+    @apply z-10 opacity-100;
+  }
+
+  .sidebar-content {
+    @apply bg-dark-green absolute flex flex-col items-center rounded px-8 py-16;
+    width: 80vw;
+    height: 95vh;
+  }
+
+  .sidebar-nav-links {
+    @apply flex flex-col pt-8
+  }
+
+  .sidebar-nav-link {
+    @apply flex items-center my-2 hover:text-custom-yellow;
   }
 }

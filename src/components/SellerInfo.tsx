@@ -15,25 +15,14 @@ const SellerInfo = ({ user, address }: SellerProps) => {
   const { name = '', image = '' } = user;
   const [sellerImage, setSellerImage] = useState(image);
   const [isUpdating, setIsUpdating] = useState(false);
+  const id = session?.user.id;
 
   return (
-    <div className="seller-container h-72 md:h-48 flex items-center justify-center bg-blue-200">
-      <div className="seller-content w-full px-6 flex flex-shrink-0 items-center">
+    <div className='seller-container h-72 md:h-48 flex items-center justify-center bg-gray-ish drop-shadow-md'>
+      <div className='seller-content w-full px-6 flex flex-shrink-0 items-center'>
         <SellerImg image={sellerImage} hidden={isUpdating ? true : false} />
-        <div className="seller-info flex-grow tracking-wide w-60">
-          {!session && (
-            <>
-              <p className="font-bold text-lg md:text-xl text-slate-800 mb-2">
-                {name}
-              </p>
-              <div className="mt-3">
-                <Button style="btn btn-primary px-4" link="/contact">
-                  Contact
-                </Button>
-              </div>
-            </>
-          )}
-          {session && (
+        <div className='seller-info flex-grow tracking-wide w-60'>
+          {session && id === user.id ? (
             <SellerDetails
               handleUpdating={setIsUpdating}
               isUpdating={isUpdating}
@@ -41,6 +30,17 @@ const SellerInfo = ({ user, address }: SellerProps) => {
               address={address}
               handleSetImage={setSellerImage}
             />
+          ) : (
+            <>
+              <p className='font-bold text-lg md:text-xl text-slate-800 mb-2'>
+                {name}
+              </p>
+              <div className='mt-3'>
+                <Button style='profile-button' link={`/contact/${user.id}`}>
+                  Contact
+                </Button>
+              </div>
+            </>
           )}
         </div>
       </div>

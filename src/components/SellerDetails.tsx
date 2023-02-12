@@ -1,10 +1,8 @@
 import { useState, Dispatch, SetStateAction, useRef } from 'react';
 import { User, Address } from '@prisma/client';
-import addressIcon from '../styles/images/address.png';
-import mailIcon from '../styles/images/mail.png';
 import checkAddressAdded from '../utils/checkAddress';
 import getSeller from '../utils/getSeller';
-import { handleUpdatePhoto } from '../utils/updatePhoto';
+import { handleProfilePhoto } from '../utils/updatePhoto';
 
 type Props = {
   user: User;
@@ -55,10 +53,10 @@ const SellerDetails = ({
     e.preventDefault();
     try {
       // Update user name & email
-      const response = await fetch(`/api/seller-name-email/${id}`, {
+      const response = await fetch(`/api/seller/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(userForm),
+        body: JSON.stringify({ userForm, type: 'update-profile' }),
       });
       const user = response.json();
       const { address, city, state, zipCode } = userForm;
@@ -66,7 +64,7 @@ const SellerDetails = ({
       let sellerAddress;
       // If new address and no address yet, create an address
       if (!hasAddress && updatedAddress) {
-        const response = await fetch(`/api/seller-address`, {
+        const response = await fetch(`/api/seller/${id}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -81,7 +79,7 @@ const SellerDetails = ({
       }
       // If new address and had an address, update address
       if (hasAddress && updatedAddress) {
-        const response = await fetch(`/api/seller-address/${id}`, {
+        const response = await fetch(`/api/seller/${id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -89,6 +87,7 @@ const SellerDetails = ({
             city,
             state,
             zipCode,
+            type: 'update-address',
           }),
         });
         sellerAddress = await response.json();
@@ -104,84 +103,84 @@ const SellerDetails = ({
   };
 
   return isUpdating ? (
-    <form className="p-2 w-full">
-      <div className="w-full flex">
-        <label htmlFor="name" className="font-semibold">
+    <form className='p-2 w-full'>
+      <div className='w-full flex'>
+        <label htmlFor='name' className='font-semibold md:w-14'>
           Name
         </label>
         <input
-          className="seller-input w-64 mb-2"
-          type="text"
+          className='seller-input w-64 mb-2'
+          type='text'
           value={userForm.name}
-          name="name"
+          name='name'
           onChange={(e) => handleOnChange(e)}
         />
       </div>
-      <div className="w-full flex">
-        <label htmlFor="email" className="font-semibold">
+      <div className='w-full flex'>
+        <label htmlFor='email' className='font-semibold md:w-14'>
           Email{' '}
         </label>
         <input
-          className="seller-input w-64 mb-2"
-          type="email"
+          className='seller-input w-64 mb-2'
+          type='email'
           value={userForm.email}
-          name="email"
+          name='email'
           onChange={(e) => handleOnChange(e)}
         />
       </div>
-      <div className="w-full flex">
-        <label htmlFor="address" className="font-semibold">
+      <div className='w-full flex'>
+        <label htmlFor='address' className='font-semibold md:w-14'>
           Street{' '}
         </label>
         <input
-          className="seller-input w-64 mb-2"
-          type="text"
+          className='seller-input w-64 mb-2'
+          type='text'
           value={userForm.address}
-          name="address"
+          name='address'
           onChange={(e) => handleOnChange(e)}
         />
       </div>
-      <div className="flex-col md:flex md:flex-row">
-        <div className="w-full md:w-fit flex">
-          <label htmlFor="city" className="font-semibold">
+      <div className='flex-col md:flex md:flex-row'>
+        <div className='w-full md:w-fit flex'>
+          <label htmlFor='city' className='font-semibold md:w-14'>
             City{' '}
           </label>
           <input
-            className="seller-input md:w-32 md:mr-3 mb-2 md:mb-0"
-            type="text"
+            className='seller-input md:w-32 md:mr-3 mb-2 md:mb-0'
+            type='text'
             value={userForm.city}
-            name="city"
+            name='city'
             onChange={(e) => handleOnChange(e)}
           />
         </div>
-        <div className="w-full md:w-fit flex">
-          <label htmlFor="state" className="font-semibold">
+        <div className='w-full md:w-fit flex'>
+          <label htmlFor='state' className='font-semibold'>
             State{' '}
           </label>
           <input
-            className="seller-input rounded md:w-10 md:mr-3 mb-2 md:mb-0"
-            type="text"
+            className='seller-input rounded md:w-10 md:mr-3 mb-2 md:mb-0'
+            type='text'
             value={userForm.state}
-            name="state"
+            name='state'
             onChange={(e) => handleOnChange(e)}
           />
         </div>
-        <div className="w-full md:w-fit flex">
-          <label htmlFor="zipCode" className="font-semibold">
+        <div className='w-full md:w-fit flex'>
+          <label htmlFor='zipCode' className='font-semibold'>
             Zip Code{' '}
           </label>
           <input
-            className="seller-input md:w-20 mb-2 md:mb-0"
-            type="number"
+            className='seller-input md:w-20 mb-2 md:mb-0'
+            type='number'
             value={userForm.zipCode}
-            name="zipCode"
+            name='zipCode'
             onChange={(e) => handleOnChange(e)}
           />
         </div>
       </div>
-      <div className="text-sm">
+      <div className='text-sm'>
         <button
-          className="text-violet-600 hover:underline text-base mt-2"
+          className='text-violet-600 hover:underline text-base mt-2'
           onClick={(e) => saveUpdate(e)}
         >
           Save
@@ -190,18 +189,22 @@ const SellerDetails = ({
     </form>
   ) : !updatePhoto ? (
     <>
-      <p className="font-bold text-lg md:text-xl text-slate-800 mb-2">
+      <p className='font-bold text-lg md:text-xl text-slate-800 mb-2'>
         {userInfo.name}
       </p>
-      <div className="text-sm ">
-        <div className="flex items-center">
-          <img className="h-6 mr-3" src={mailIcon.src} alt="email icon" />
-          <p className="text-slate-600">{userInfo.email}</p>
+      <div className='text-sm '>
+        <div className='flex items-center'>
+          <img className='h-6 mr-3' src='/images/mail.png' alt='email icon' />
+          <p className='text-slate-600'>{userInfo.email}</p>
         </div>
-        <div className="flex items-center">
-          <img className="h-6 mr-3" src={addressIcon.src} alt="address icon" />
+        <div className='flex items-center'>
+          <img
+            className='h-6 mr-3'
+            src='/images/address.png'
+            alt='address icon'
+          />
           {hasAddress ? (
-            <div className="text-slate-700 pt-2">
+            <div className='text-slate-700 pt-2'>
               <p>{userInfo.address}</p>
               <p>
                 <span>{userInfo.city + ', '}</span>
@@ -210,38 +213,40 @@ const SellerDetails = ({
               </p>
             </div>
           ) : (
-            <p className="text-slate-700">No address listed</p>
+            <p className='text-slate-700'>No address listed</p>
           )}
         </div>
-        <button
-          className="text-violet-600 hover:underline text-sm mt-2"
-          onClick={() => handleUpdating(true)}
-        >
-          Update Profile
-        </button>
-        <button
-          className="text-green-800 hover:underline text-sm mt-2 ml-3"
-          onClick={() => setUpdatePhoto(true)}
-        >
-          Update Photo
-        </button>
+        <div className=''>
+          <button
+            className='profile-button mr-2'
+            onClick={() => handleUpdating(true)}
+          >
+            Update Profile
+          </button>
+          <button
+            className='profile-button'
+            onClick={() => setUpdatePhoto(true)}
+          >
+            Update Photo
+          </button>
+        </div>
       </div>
     </>
   ) : (
     <div>
-      <div className="max-w-50">
+      <div className='max-w-50'>
         <input
           ref={imageRef}
-          type="file"
-          name="image"
-          accept=".jpeg, .jpeg, .png"
-          className="w-50 overflow-hidden text-xs md:text-base"
+          type='file'
+          name='image'
+          accept='.jpeg, .jpeg, .png'
+          className='w-50 overflow-hidden text-xs md:text-base'
         />
       </div>
       <button
-        className="btn btn-primary w-40 mt-4"
+        className='btn btn-primary w-40 mt-4'
         onClick={() =>
-          handleUpdatePhoto(imageRef, id, handleSetImage, setUpdatePhoto)
+          handleProfilePhoto(imageRef, id, handleSetImage, setUpdatePhoto)
         }
       >
         Update

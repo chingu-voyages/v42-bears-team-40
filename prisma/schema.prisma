@@ -62,9 +62,9 @@ model Item {
   title       String
   description String?
   picture     String?
-  price       String
+  price       Float
   status      Status    @default(available)
-  category    String
+  category    Category  
   user        User    @relation(fields: [userId], references: [id])
   userId      String
 }
@@ -83,3 +83,19 @@ enum Status {
   pending
   sold
 }
+enum Category {
+  books
+  clothing
+  crafts
+  electronics
+  furniture
+  games
+  kitchen
+  movies
+  music
+  other
+  outdoors
+  sports
+  toys
+  }
+
