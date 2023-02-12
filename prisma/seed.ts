@@ -5,7 +5,7 @@ import { seedData } from '../utils/data';
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.item.deleteMany({});
+  // await prisma.item.deleteMany({});
   const items: Item[] = [];
 
   const userIdOptions = [
