@@ -1,9 +1,18 @@
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
+import { Dispatch, SetStateAction } from 'react';
+import Alert from './Alert';
 
 type Props = {
   formChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmitForm: (e: React.SyntheticEvent, imageRef) => Promise<void>;
+  handleSubmitForm: (
+    e: React.SyntheticEvent,
+    imageRef,
+    setAlertType: Dispatch<SetStateAction<string>>,
+    setMessage: Dispatch<SetStateAction<string>>,
+    setShowAlert: Dispatch<SetStateAction<boolean>>
+  ) => Promise<void>;
   formData: {
     itemId?: string;
     title: string;
@@ -15,6 +24,10 @@ type Props = {
 };
 
 const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
+  const [showAlert, setShowAlert] = useState(true);
+  const [message, setMessage] = useState('');
+  const [alertType, setAlertType] = useState('');
+
   const router = useRouter();
   const isEditing = !router.pathname.includes('add-item');
   const notComplete =
@@ -36,6 +49,7 @@ const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
           {isEditing ? 'Edit your Item' : 'Add An Item'}
         </h3>
         <form className='w-9/12 mx-auto'>
+          {showAlert && <Alert alertType={alertType} message={message} />}
           <div className='text-left'>
             <label className='font-semibold text-lg'>
               Name<span className='text-red-700'>*</span>
@@ -132,7 +146,15 @@ const ItemForm = ({ formChange, handleSubmitForm, formData }: Props) => {
                 : 'btn btn-primary m-2'
             }
             type='submit'
-            onClick={(e) => handleSubmitForm(e, imageRef)}
+            onClick={(e) =>
+              handleSubmitForm(
+                e,
+                imageRef,
+                setAlertType,
+                setMessage,
+                setShowAlert
+              )
+            }
             disabled={notComplete}
           >
             {isEditing ? 'Edit Item' : 'Add Item'}

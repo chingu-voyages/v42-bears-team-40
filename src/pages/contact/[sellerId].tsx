@@ -2,6 +2,7 @@ import Layout from '../../components/Layout';
 import ContactForm from '../../components/ContactForm';
 import { User } from '@prisma/client';
 import { ItemType } from '../../components/Item';
+import { prisma } from '../../server/db';
 
 type ContactProps = {
   user: User;

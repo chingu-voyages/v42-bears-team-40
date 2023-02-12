@@ -6,6 +6,10 @@ import { prisma } from '../../../../server/db';
 import { useSession } from 'next-auth/react';
 import ItemForm from '../../../../components/ItemForm';
 import { handleImagePhoto } from '../../../../utils/updatePhoto';
+import {
+  handleAlertSuccess,
+  handleAlertDanger,
+} from '../../../../utils/handleAlert';
 
 type ItemProps = {
   item: ItemType;
@@ -50,7 +54,13 @@ const EditItem: React.FC = ({ item }: ItemProps) => {
     });
   };
 
-  const submitItem = async (e: React.SyntheticEvent, imageRef) => {
+  const submitItem = async (
+    e: React.SyntheticEvent,
+    imageRef,
+    setAlertType,
+    setMessage,
+    setShowAlert
+  ) => {
     e.preventDefault();
     let price = Number(itemForm.price);
     const item = { ...itemForm, price };
@@ -62,8 +72,20 @@ const EditItem: React.FC = ({ item }: ItemProps) => {
       });
       const updatedItem = await response.json();
       await handleImagePhoto(imageRef, updatedItem.itemId);
-      Router.push(`/yard/${userId}`);
+      handleAlertSuccess(
+        setAlertType,
+        setMessage,
+        setShowAlert,
+        'Item successfully edited!'
+      );
+      setTimeout(() => Router.push(`/yard/${userId}`), 3000);
     } catch (error) {
+      handleAlertDanger(
+        setAlertType,
+        setMessage,
+        setShowAlert,
+        'There was an issue editing your item'
+      );
       console.log(error);
     }
   };

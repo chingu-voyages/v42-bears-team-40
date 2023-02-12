@@ -32,6 +32,10 @@
     background: #f6c3c3;
   }
 
+  .alert {
+    @apply border rounded my-2 p-2 tracking-wide;
+  }
+
   .item-section {
     @apply p-8 mx-auto;
   }

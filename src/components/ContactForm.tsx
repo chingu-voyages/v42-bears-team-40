@@ -4,6 +4,7 @@ import { ItemType } from './Item';
 import { User } from '@prisma/client';
 import Router from 'next/router';
 import Select from 'react-select';
+import Alert from './Alert';
 
 type FormProps = {
   user: User;
@@ -15,6 +16,8 @@ const ContactForm = ({ user, items: sellerItems }: FormProps) => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [items, setItems] = useState(null);
+  const [alertType, setAlertType] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
 
   const options = sellerItems.map((item) => {
     return { value: item.title, label: item.title };
@@ -26,7 +29,7 @@ const ContactForm = ({ user, items: sellerItems }: FormProps) => {
     try {
       axios.defaults.headers.post['Content-Type'] = 'application/json';
       await axios
-        .post(`https://formsubmit.co/ajax/${user.email}`, {
+        .post(`https://formsubmit.co/ajax/lmcsay@gmail.com`, {
           name,
           email,
           message,
@@ -38,8 +41,20 @@ const ContactForm = ({ user, items: sellerItems }: FormProps) => {
       setEmail('');
       setMessage('');
       setItems(null);
-      Router.push('/');
+      setShowAlert(true);
+      setAlertType('success');
+      await setTimeout(() => {
+        setShowAlert(false);
+        setAlertType('');
+        Router.push('/');
+      }, 3000);
     } catch (error) {
+      setShowAlert(true);
+      setAlertType('danger');
+      await setTimeout(() => {
+        setShowAlert(false);
+        setAlertType('');
+      }, 3000);
       console.error(error);
     }
   };
@@ -55,6 +70,13 @@ const ContactForm = ({ user, items: sellerItems }: FormProps) => {
           back to you!
         </p>
         <form onSubmit={(e) => handleSubmit(e)}>
+          <div className='w-8/12 mx-auto'>
+            {showAlert && alertType === 'success' ? (
+              <Alert message={'Email sent!'} alertType={alertType} />
+            ) : (
+              <Alert message={'There was an error'} alertType={alertType} />
+            )}
+          </div>
           <input
             className='form-input'
             type='text'
