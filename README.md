@@ -24,7 +24,7 @@ The entire codebase is written in **TypeScript**, here is a list of technologies
 - **React**: User interface library
 - **Postgres**: Database
 - **Prisma**: Open Source ORM(Object Relational Model) for all databases
-- **Netlify**: Hosting platform
+- **Vercel**: Hosting platform
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -35,7 +35,7 @@ The entire codebase is written in **TypeScript**, here is a list of technologies
 
 <table align="center">
   <tr>  
-    <td align="center"><a href="https://github.com/ljmccode"><img src="https://avatars.githubusercontent.com/u/46797700?v=4" width="100px;" alt=""/><br /><sub><b>Linda McSay Callahan</b></sub></a><br /><a href="https://github.com/chingu-voyages/v42-bears-team-40/commits?author=ljmccode" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/ljmccode"><img src="https://avatars.githubusercontent.com/u/46797700?v=4" width="100px;" alt=""/><br /><sub><b>Laura McSay Callahan</b></sub></a><br /><a href="https://github.com/chingu-voyages/v42-bears-team-40/commits?author=ljmccode" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/rmcguire6/"><img src="https://avatars.githubusercontent.com/u/28935544?v=4" width="100px;" alt=""/><br /><sub><b>Regina M</b></sub></a><br /><a href="https://github.com/chingu-voyages/v42-bears-team-40/commits?author=rmcguire6" title="Code">💻</a></td>
     <td align="center"><a href="https://www.huntermarshall.dev/"><img src="https://avatars.githubusercontent.com/u/11290259?v=464499366?v=4" width="100px;" alt=""/><br /><sub><b>Hunter Marshall</b></sub></a><br /><a href="https://github.com/chingu-voyages/v42-bears-team-40/commits?author=beidah" title="Code">💻</a></td>
   </tr>
